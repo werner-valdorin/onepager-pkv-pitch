@@ -27,11 +27,21 @@
 
   .a4 {
     width: 794px;
-    height: 1123px;
+    min-height: 1123px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 4px;
     box-shadow: 0 30px 100px rgba(0,0,0,0.7);
+  }
+
+  @media (max-width: 820px) {
+    body { padding: 0; }
+    .a4 {
+      width: 100%;
+      min-height: auto;
+      border-radius: 0;
+      box-shadow: none;
+    }
   }
 
   /* ================================================================
@@ -144,29 +154,26 @@
   .logo-block {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.04) 100%);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 14px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    gap: 14px;
+    padding: 8px 0;
   }
 
   .logo-block img {
-    height: 44px;
+    height: 48px;
     width: auto;
-    filter: brightness(1.1);
+    mix-blend-mode: screen;
+    filter: brightness(2.5) saturate(0.3);
+    opacity: 0.8;
   }
 
   .logo-block img.vkb {
-    height: 40px;
+    height: 42px;
   }
 
   .logo-divider {
     width: 1px;
-    height: 34px;
-    background: linear-gradient(180deg, transparent, rgba(255,255,255,0.15), transparent);
+    height: 30px;
+    background: rgba(255,255,255,0.12);
   }
 
   /* ================================================================
@@ -254,7 +261,7 @@
     height: 72px;
   }
 
-  /* --- TYPE B: Kunden-Link (Step 3) — Smartphone-Mockup --- */
+  /* --- TYPE B: Kunden-Zugang (Step 3) — Smartphone-Mockup --- */
   .step-pill {
     padding: 12px 16px;
     background: linear-gradient(135deg, rgba(184,207,227,0.12) 0%, rgba(184,207,227,0.05) 100%);
@@ -597,6 +604,31 @@
     50% { r: 5; opacity: 0.1; }
     100% { r: 3; opacity: 0.4; }
   }
+
+  /* ================================================================
+     Mobile responsive
+     ================================================================ */
+  @media (max-width: 820px) {
+    .content { padding: 20px 20px 16px; }
+    .header { flex-direction: column; margin-bottom: 16px; }
+    .header-text h1 { font-size: 22px; max-width: none; }
+    .timeline {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+    .g-s1, .g-s2, .g-s3, .g-s4, .g-s5, .g-s6, .g-s7, .g-cta, .g-arrow1 {
+      grid-column: 1 !important;
+      grid-row: auto !important;
+    }
+    .step-hero { flex-direction: column; }
+    .hero-illust { width: 80px; height: 80px; }
+    .hero-illust svg { width: 80px; height: 80px; }
+    .connection-lines { display: none; }
+    .g-arrow1 { display: none !important; }
+    .qr-placeholder { width: 90px; height: 90px; }
+    .qr-placeholder svg { width: 60px; height: 60px; }
+  }
 </style>
 </head>
 <body>
@@ -616,10 +648,10 @@
       <div class="header-text">
         <div class="overline">Kooperationsangebot an die UKV</div>
         <h1>Jeder PKV-Interessent<br>digital zum <span class="accent">Abschluss</span>.<br><span class="light">In einem Durchgang.</span></h1>
-        <div class="subtitle">Durchgehende Vertriebsstrecke vom Erstgespräch bis zur elektronischen Unterschrift — mit KI-gestützter Risikoanalyse als Kooperationspunkt.</div>
+        <div class="subtitle">Ein Werkzeug für Ihre Berater. Vom Erstgespräch bis zum unterschriebenen Antrag — ohne Systemwechsel.</div>
       </div>
-      <!-- Logos werden morgen sauber eingebaut -->
-    </div>
+      <!-- Logos kommen später sauber rein -->
+      <!-- AUSGEBLENDET: <!-- Logos kommen später -->
 
     <!-- TIMELINE GRID -->
     <div class="timeline">
@@ -768,7 +800,7 @@
       <div class="step step-pill g-s3">
         <div class="pill-head">
           <div class="step-num">3</div>
-          <h3>Kunden-Link</h3>
+          <h3>Kunden-Zugang</h3>
         </div>
         <p>Persönlicher Link — der Kunde erkundet das Angebot in Ruhe selbst.</p>
         <div class="step-illust">
@@ -955,7 +987,7 @@
           </div>
           <div class="step-num">6</div>
           <h3>Exaktes Angebot</h3>
-          <p>Konkrete Risikozuschläge, fertige Arzt-Rückfrage — im richtigen Format für Ihren Innendienst.</p>
+          <p>Konkrete Risikozuschläge und fertige Beschreibung für die ärztliche Rückfrage — direkt für den Kunden.</p>
         </div>
       </div>
 
@@ -995,7 +1027,7 @@
           </div>
           <div class="step-num">7</div>
           <h3>Online-Antrag</h3>
-          <p>Digitale Unterschrift, kein Medienbruch. Maximale Effizienz, angenehmes Kundenerlebnis.</p>
+          <p>Digitale Unterschrift, kein Medienbruch. Fertige Übergabe im richtigen Format für Ihren Innendienst.</p>
         </div>
       </div>
 
@@ -1004,7 +1036,7 @@
     <!-- FOOTER -->
     <div class="footer">
       <div class="brand">Obermeier Versicherungen, Bad Endorf</div>
-      <div class="meta">Ausschliesslichkeitsvermittler der Versicherungskammer Bayern</div>
+      <div class="meta">Ausschließlichkeitsvermittler der Versicherungskammer Bayern</div>
     </div>
 
   </div>
