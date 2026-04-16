@@ -27,9 +27,9 @@
 
   .a4 {
     width: 794px;
-    min-height: 1123px;
+    height: 1123px;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     border-radius: 4px;
     box-shadow: 0 30px 100px rgba(0,0,0,0.7);
   }
@@ -38,9 +38,14 @@
     body { padding: 0; }
     .a4 {
       width: 100%;
-      min-height: auto;
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
       border-radius: 0;
       box-shadow: none;
+    }
+    .bg-base, .bg-glow-center, .bg-glow-top, .bg-noise, .bg-lines {
+      position: fixed;
     }
   }
 
@@ -105,7 +110,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 30px 42px 18px;
+    padding: 22px 36px 12px;
   }
 
   /* ================================================================
@@ -115,7 +120,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
   }
 
   .header-text { flex: 1; }
@@ -126,12 +131,12 @@
     text-transform: uppercase;
     color: #adc130;
     font-weight: 500;
-    margin-bottom: 12px;
-    opacity: 0.9;
+    margin-bottom: 10px;
+    opacity: 1;
   }
 
   .header-text h1 {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.32;
@@ -143,48 +148,26 @@
   h1 .light { color: rgba(255,255,255,0.45); font-weight: 300; }
 
   .header-text .subtitle {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 12px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.75);
     line-height: 1.55;
     max-width: 370px;
   }
 
-  /* Logo block */
-  .logo-block {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 8px 0;
-  }
-
-  .logo-block img {
-    height: 48px;
-    width: auto;
-    mix-blend-mode: screen;
-    filter: brightness(2.5) saturate(0.3);
-    opacity: 0.8;
-  }
-
-  .logo-block img.vkb {
-    height: 42px;
-  }
-
-  .logo-divider {
-    width: 1px;
-    height: 30px;
-    background: rgba(255,255,255,0.12);
-  }
-
   /* ================================================================
-     Timeline Grid
+     Timeline Grid — REDESIGNED: 4 rows, no arrow row
+     Row 1: Steps 1-3 (equal compact cards)
+     Row 2: Step 4 (2col) + CTA (1col)
+     Row 3: Hero (full width)
+     Row 4: Steps 6-7 + CTA right
      ================================================================ */
   .timeline {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto 16px auto auto auto;
-    gap: 10px 12px;
+    grid-template-rows: auto auto auto auto;
+    gap: 8px 10px;
     position: relative;
   }
 
@@ -208,26 +191,26 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px; height: 24px;
+    width: 28px; height: 28px;
     border-radius: 50%;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
     flex-shrink: 0;
   }
 
   .step h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 3px;
+    color: rgba(255,255,255,1);
+    margin-bottom: 2px;
     line-height: 1.3;
   }
 
   .step p {
-    font-size: 10.5px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.55;
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
   }
 
   .step-illust {
@@ -237,79 +220,56 @@
     justify-content: center;
   }
 
-  /* --- TYPE A: Full card (Steps 1, 2) — Illustration OBEN, Text UNTEN --- */
-  .step-full {
-    padding: 12px 16px 12px;
-    background: linear-gradient(145deg, rgba(0,73,141,0.18) 0%, rgba(0,73,141,0.08) 100%);
-    border: 1px solid rgba(0,73,141,0.25);
+  /* --- TYPE A: Compact card (Steps 1, 2, 3) — all same treatment --- */
+  .step-compact {
+    padding: 10px 12px 8px;
+    background: linear-gradient(145deg, rgba(0,73,141,0.28) 0%, rgba(0,73,141,0.14) 100%);
+    border: 1.5px solid rgba(0,73,141,0.5);
   }
 
-  .step-full .step-num {
-    background: rgba(0,73,141,0.25);
-    border: 1px solid rgba(0,73,141,0.35);
-    color: #5ba3e0;
+  .step-compact .step-num {
+    background: rgba(0,73,141,0.4);
+    border: 1.5px solid rgba(0,73,141,0.5);
+    color: #7fbfef;
   }
 
-  .step-full .step-illust {
+  .step-compact .step-illust {
     order: -1;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     padding: 0;
   }
 
-  .step-full .step-illust svg {
+  .step-compact .step-illust svg {
     width: 100%;
-    height: 72px;
+    height: 40px;
   }
 
-  /* --- TYPE B: Kunden-Zugang (Step 3) — Smartphone-Mockup --- */
-  .step-pill {
-    padding: 12px 16px;
-    background: linear-gradient(135deg, rgba(184,207,227,0.12) 0%, rgba(184,207,227,0.05) 100%);
+  /* Step 3 specific — same card type but lighter border */
+  .step-compact.light-border {
+    background: linear-gradient(135deg, rgba(184,207,227,0.18) 0%, rgba(184,207,227,0.08) 100%);
     border: 1px solid rgba(184,207,227,0.18);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
   }
 
-  .step-pill .step-num {
+  .step-compact.light-border .step-num {
     background: rgba(184,207,227,0.15);
     border: 1px solid rgba(184,207,227,0.25);
     color: #b8cfe3;
-    margin-bottom: 0;
-  }
-
-  .step-pill .pill-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .step-pill .step-illust {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .step-pill .step-illust svg {
-    width: 100%;
-    height: 80px;
   }
 
   /* --- TYPE C: Upload zone (Step 4) --- */
   .step-upload {
-    padding: 14px 16px;
-    background: linear-gradient(135deg, rgba(0,73,141,0.1) 0%, rgba(0,73,141,0.04) 100%);
-    border: 2px dashed rgba(0,73,141,0.28);
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(0,73,141,0.18) 0%, rgba(0,73,141,0.08) 100%);
+    border: 2px dashed rgba(0,73,141,0.4);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .step-upload .step-num {
     background: rgba(0,73,141,0.2);
     border: 1px solid rgba(0,73,141,0.3);
-    color: #5ba3e0;
+    color: #7fbfef;
     margin-bottom: 0;
   }
 
@@ -317,13 +277,13 @@
   .step-upload .step-text h3 { margin-bottom: 2px; }
 
   .step-upload .step-illust svg {
-    width: 66px; height: 66px;
+    width: 54px; height: 54px;
   }
 
   /* --- TYPE D: HERO (Step 5) --- */
   .step-hero {
     grid-column: 1 / -1;
-    padding: 20px 26px;
+    padding: 12px 20px;
     background: linear-gradient(135deg, rgba(173,193,48,0.1) 0%, rgba(173,193,48,0.03) 50%, rgba(0,73,141,0.05) 100%);
     border: 1.5px solid rgba(173,193,48,0.25);
     border-radius: 20px;
@@ -353,12 +313,12 @@
   }
 
   .hero-illust {
-    width: 100px; height: 100px;
+    width: 70px; height: 70px;
     flex-shrink: 0;
   }
 
   .hero-illust svg {
-    width: 100px; height: 100px;
+    width: 70px; height: 70px;
   }
 
   .hero-content { flex: 1; }
@@ -374,12 +334,12 @@
   .step-hero h3 {
     font-size: 15px;
     color: #fff;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .step-hero p {
     font-size: 9.5px;
-    color: rgba(255,255,255,0.48);
+    color: rgba(255,255,255,0.7);
     line-height: 1.6;
     max-width: 380px;
   }
@@ -388,7 +348,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 9px;
     font-weight: 700;
     text-transform: uppercase;
@@ -396,7 +356,7 @@
     color: #adc130;
     background: linear-gradient(135deg, rgba(173,193,48,0.15) 0%, rgba(173,193,48,0.06) 100%);
     border: 1px solid rgba(173,193,48,0.25);
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
   }
 
@@ -420,10 +380,10 @@
     50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.15; }
   }
 
-  /* --- TYPE E: Result cards (Steps 6, 7) — HERVORGEHOBEN --- */
+  /* --- TYPE E: Result cards (Steps 6, 7) --- */
   .step-result {
-    padding: 14px 18px 14px;
-    background: linear-gradient(145deg, rgba(0,73,141,0.2) 0%, rgba(0,73,141,0.08) 100%);
+    padding: 8px 12px 8px;
+    background: linear-gradient(145deg, rgba(0,73,141,0.2) 0%, rgba(0,73,141,0.14) 100%);
     border: 1.5px solid rgba(0,73,141,0.3);
     display: flex;
     flex-direction: column;
@@ -435,39 +395,39 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(91,163,224,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(91,163,224,0.4), transparent);
   }
 
   .step-result .step-num {
-    background: rgba(0,73,141,0.25);
-    border: 1px solid rgba(0,73,141,0.35);
-    color: #5ba3e0;
+    background: rgba(0,73,141,0.4);
+    border: 1.5px solid rgba(0,73,141,0.5);
+    color: #7fbfef;
   }
 
   .step-result .step-illust {
     order: -1;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     padding: 0;
   }
 
   .step-result .step-illust svg {
     width: 100%;
-    height: 65px;
+    height: 34px;
   }
 
   .step-result h3 {
-    font-size: 15px !important;
+    font-size: 13px !important;
     color: rgba(255,255,255,0.95) !important;
   }
 
   .step-result p {
-    font-size: 11px !important;
+    font-size: 10px !important;
     color: rgba(255,255,255,0.6) !important;
   }
 
   .step-result.final {
     background: linear-gradient(145deg, rgba(173,193,48,0.08) 0%, rgba(0,73,141,0.12) 100%);
-    border-color: rgba(173,193,48,0.2);
+    border-color: rgba(173,193,48,0.3);
   }
 
   .step-result.final::after {
@@ -475,25 +435,31 @@
   }
 
   .step-result.final .step-num {
-    background: rgba(173,193,48,0.2);
+    background: rgba(173,193,48,0.3);
     border-color: rgba(173,193,48,0.3);
     color: #adc130;
   }
 
   /* ================================================================
-     Grid positions
+     Grid positions — NEW LAYOUT
      ================================================================ */
   .g-s1 { grid-column: 1; grid-row: 1; }
   .g-s2 { grid-column: 2; grid-row: 1; }
   .g-s3 { grid-column: 3; grid-row: 1; }
-  .g-arrow1 { grid-column: 1 / -1; grid-row: 2; }
-  .g-s4 { grid-column: 1 / 3; grid-row: 3; }
-  .g-cta { grid-column: 3; grid-row: 3 / 5; }
-  .g-s5 { grid-column: 1 / 3; grid-row: 4; }
-  .g-s6 { grid-column: 1; grid-row: 5; }
-  .g-s7 { grid-column: 2; grid-row: 5; }
+  .g-s4 { grid-column: 1 / -1; grid-row: 2; }
+  .g-s5 { grid-column: 1 / 3; grid-row: 3; }
+  .g-cta { grid-column: 3; grid-row: 3; }
+  .g-s6 { grid-column: 1; grid-row: 4; }
+  .g-s7 { grid-column: 2; grid-row: 4; }
+  .g-final { grid-column: 3; grid-row: 4; }
 
   .g-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .g-final {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -503,7 +469,7 @@
      CTA Box
      ================================================================ */
   .cta-box {
-    padding: 18px 16px;
+    padding: 10px 12px;
     background: linear-gradient(165deg, rgba(0,73,141,0.15) 0%, rgba(173,193,48,0.05) 100%);
     border: 1px solid rgba(0,73,141,0.2);
     border-radius: 16px;
@@ -521,24 +487,24 @@
   }
 
   .cta-box h3 {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
     color: #fff;
-    line-height: 1.45;
-    margin-bottom: 8px;
+    line-height: 1.4;
+    margin-bottom: 6px;
   }
 
   .cta-box h3 .green { color: #adc130; }
 
   .cta-box p {
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.55;
-    margin-bottom: 14px;
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    margin-bottom: 8px;
   }
 
   .qr-placeholder {
-    width: 80px; height: 80px;
+    width: 70px; height: 70px;
     margin: 0 auto;
     border: 1px dashed rgba(255,255,255,0.15);
     border-radius: 10px;
@@ -546,26 +512,67 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    padding: 6px;
+    gap: 4px;
+    padding: 5px;
   }
 
   .qr-placeholder svg {
-    width: 54px; height: 54px;
+    width: 48px; height: 48px;
     fill: rgba(255,255,255,0.9);
   }
 
   .qr-placeholder span {
-    font-size: 7px;
-    color: rgba(255,255,255,0.35);
+    font-size: 6.5px;
+    color: rgba(255,255,255,0.55);
     letter-spacing: 0.3px;
+  }
+
+  /* ================================================================
+     Final CTA — bottom right cell
+     ================================================================ */
+  .final-cta {
+    padding: 10px 12px;
+    background: linear-gradient(165deg, rgba(173,193,48,0.08) 0%, rgba(0,73,141,0.1) 100%);
+    border: 1.5px solid rgba(173,193,48,0.3);
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(173,193,48,0.3), transparent);
+  }
+
+  .final-cta .contact-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+
+  .final-cta .contact-text .green { color: #adc130; }
+
+  .final-cta .contact-sub {
+    font-size: 8px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
   }
 
   /* ================================================================
      Footer
      ================================================================ */
   .footer {
-    padding-top: 12px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -574,7 +581,7 @@
   .footer .brand {
     font-size: 8.5px;
     font-weight: 700;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.55);
   }
 
   .footer .meta {
@@ -617,7 +624,7 @@
       grid-template-rows: auto;
       gap: 12px;
     }
-    .g-s1, .g-s2, .g-s3, .g-s4, .g-s5, .g-s6, .g-s7, .g-cta, .g-arrow1 {
+    .g-s1, .g-s2, .g-s3, .g-s4, .g-s5, .g-s6, .g-s7, .g-cta, .g-final {
       grid-column: 1 !important;
       grid-row: auto !important;
     }
@@ -625,7 +632,6 @@
     .hero-illust { width: 80px; height: 80px; }
     .hero-illust svg { width: 80px; height: 80px; }
     .connection-lines { display: none; }
-    .g-arrow1 { display: none !important; }
     .qr-placeholder { width: 90px; height: 90px; }
     .qr-placeholder svg { width: 60px; height: 60px; }
   }
@@ -650,8 +656,7 @@
         <h1>Jeder PKV-Interessent<br>digital zum <span class="accent">Abschluss</span>.<br><span class="light">In einem Durchgang.</span></h1>
         <div class="subtitle">Ein Werkzeug für Ihre Berater. Vom Erstgespräch bis zum unterschriebenen Antrag — ohne Systemwechsel.</div>
       </div>
-      <!-- Logos kommen später sauber rein -->
-      <!-- AUSGEBLENDET: <!-- Logos kommen später -->
+    </div>
 
     <!-- TIMELINE GRID -->
     <div class="timeline">
@@ -659,18 +664,12 @@
       <!-- CONNECTION LINES SVG LAYER -->
       <svg class="connection-lines" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none;" preserveAspectRatio="none">
         <defs>
-          <!-- Pfad 1→2: obere Reihe, links nach mitte -->
-          <path id="path-1-2" d="M118,90 C160,90 170,90 220,90" fill="none"/>
-          <!-- Pfad 2→3: obere Reihe, mitte nach rechts -->
-          <path id="path-2-3" d="M340,90 C380,90 390,90 450,90" fill="none"/>
-          <!-- Pfad 3→4: rechts oben runter nach links unten (unter der Pfeilreihe durch) -->
-          <path id="path-3-4" d="M470,180 C470,220 200,230 170,265" fill="none"/>
-          <!-- Pfad 4→5: Schritt 4 runter zu Hero -->
-          <path id="path-4-5" d="M220,310 C220,340 180,360 200,380" fill="none"/>
-          <!-- Pfad 5→6: Hero runter links -->
-          <path id="path-5-6" d="M200,440 C200,470 130,480 118,500" fill="none"/>
-          <!-- Pfad 5→7: Hero runter mitte -->
-          <path id="path-5-7" d="M330,440 C330,470 340,480 340,500" fill="none"/>
+          <path id="path-1-2" d="M118,80 C160,80 170,80 220,80" fill="none"/>
+          <path id="path-2-3" d="M340,80 C380,80 390,80 450,80" fill="none"/>
+          <path id="path-3-4" d="M470,160 C470,190 200,200 170,220" fill="none"/>
+          <path id="path-4-5" d="M220,270 C220,290 180,310 200,330" fill="none"/>
+          <path id="path-5-6" d="M200,400 C200,420 130,430 118,450" fill="none"/>
+          <path id="path-5-7" d="M330,400 C330,420 340,430 340,450" fill="none"/>
         </defs>
 
         <!-- Gestrichelte Linien -->
@@ -681,7 +680,7 @@
         <use href="#path-5-6" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
         <use href="#path-5-7" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
 
-        <!-- Animierte Punkte: Hellblau fuer normale Schritte -->
+        <!-- Animierte Punkte -->
         <circle r="3" fill="rgba(184,207,227,0.4)">
           <animateMotion dur="10s" begin="0s" repeatCount="indefinite"><mpath href="#path-1-2"/></animateMotion>
         </circle>
@@ -691,13 +690,9 @@
         <circle r="3" fill="rgba(184,207,227,0.4)">
           <animateMotion dur="12s" begin="4s" repeatCount="indefinite"><mpath href="#path-3-4"/></animateMotion>
         </circle>
-
-        <!-- Punkte Richtung Schritt 5: Gruen -->
         <circle r="3.5" fill="rgba(173,193,48,0.4)">
           <animateMotion dur="10s" begin="6s" repeatCount="indefinite"><mpath href="#path-4-5"/></animateMotion>
         </circle>
-
-        <!-- Punkte nach Schritt 5: Hellblau -->
         <circle r="3" fill="rgba(184,207,227,0.4)">
           <animateMotion dur="10s" begin="8s" repeatCount="indefinite"><mpath href="#path-5-6"/></animateMotion>
         </circle>
@@ -706,38 +701,32 @@
         </circle>
       </svg>
 
-      <!-- ROW 1: Steps 1, 2, 3 -->
+      <!-- ROW 1: Steps 1, 2, 3 — all compact equal cards -->
 
-      <!-- STEP 1 — Illustration OBEN, gross -->
-      <div class="step step-full g-s1">
+      <!-- STEP 1 -->
+      <div class="step step-compact g-s1">
         <div class="step-inner">
           <div class="step-illust">
             <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
               <!-- Browser-Fenster -->
-              <rect x="20" y="4" width="160" height="64" rx="8" stroke="rgba(91,163,224,0.3)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
+              <rect x="20" y="4" width="160" height="64" rx="8" stroke="rgba(91,163,224,0.45)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
               <rect x="20" y="4" width="160" height="14" rx="8" fill="rgba(0,73,141,0.08)"/>
-              <rect x="20" y="16" width="160" height="1" fill="rgba(91,163,224,0.08)"/>
-              <!-- Browser dots -->
-              <circle cx="30" cy="11" r="2" fill="rgba(91,163,224,0.25)"/>
-              <circle cx="37" cy="11" r="2" fill="rgba(91,163,224,0.2)"/>
-              <circle cx="44" cy="11" r="2" fill="rgba(91,163,224,0.15)"/>
-              <!-- URL bar -->
-              <rect x="54" y="8" width="80" height="6" rx="3" fill="rgba(91,163,224,0.08)" stroke="rgba(91,163,224,0.12)" stroke-width="0.5"/>
-              <!-- Content: Formular-Schritte -->
-              <rect x="30" y="22" width="65" height="8" rx="4" fill="rgba(0,73,141,0.15)" stroke="rgba(91,163,224,0.2)" stroke-width="0.5"/>
-              <rect x="30" y="34" width="55" height="8" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.15)" stroke-width="0.5"/>
-              <rect x="30" y="46" width="45" height="8" rx="4" fill="rgba(0,73,141,0.07)" stroke="rgba(91,163,224,0.1)" stroke-width="0.5"/>
-              <!-- Progress Indicator -->
-              <circle cx="110" cy="26" r="4" fill="rgba(173,193,48,0.2)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
+              <rect x="20" y="16" width="160" height="1" fill="rgba(91,163,224,0.16)"/>
+              <circle cx="30" cy="11" r="2" fill="rgba(91,163,224,0.4)"/>
+              <circle cx="37" cy="11" r="2" fill="rgba(91,163,224,0.35)"/>
+              <circle cx="44" cy="11" r="2" fill="rgba(91,163,224,0.28)"/>
+              <rect x="54" y="8" width="80" height="6" rx="3" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.12)" stroke-width="0.5"/>
+              <rect x="30" y="22" width="65" height="8" rx="4" fill="rgba(0,73,141,0.15)" stroke="rgba(91,163,224,0.35)" stroke-width="0.5"/>
+              <rect x="30" y="34" width="55" height="8" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
+              <rect x="30" y="46" width="45" height="8" rx="4" fill="rgba(0,73,141,0.07)" stroke="rgba(91,163,224,0.2)" stroke-width="0.5"/>
+              <circle cx="110" cy="26" r="4" fill="rgba(173,193,48,0.3)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
                 <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
               </circle>
-              <line x1="110" y1="32" x2="110" y2="42" stroke="rgba(91,163,224,0.15)" stroke-width="0.8" stroke-dasharray="2 2"/>
-              <circle cx="110" cy="46" r="3" fill="rgba(91,163,224,0.08)" stroke="rgba(91,163,224,0.15)" stroke-width="0.5"/>
-              <!-- Cursor animiert -->
+              <line x1="110" y1="32" x2="110" y2="42" stroke="rgba(91,163,224,0.28)" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <circle cx="110" cy="46" r="3" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
               <g class="anim-float">
                 <path d="M140 30 l0 14 l4 -4 l6 0 z" fill="rgba(91,163,224,0.35)" stroke="rgba(91,163,224,0.5)" stroke-width="0.5"/>
               </g>
-              <!-- Typing dots -->
               <circle cx="34" cy="58" r="1.5" fill="rgba(91,163,224,0.4)">
                 <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s" repeatCount="indefinite"/>
               </circle>
@@ -755,38 +744,31 @@
         </div>
       </div>
 
-      <!-- STEP 2 — Illustration OBEN, gross -->
-      <div class="step step-full g-s2">
+      <!-- STEP 2 -->
+      <div class="step step-compact g-s2">
         <div class="step-inner">
           <div class="step-illust">
             <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Dokument/Angebot -->
-              <rect x="30" y="4" width="58" height="64" rx="4" stroke="rgba(91,163,224,0.3)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
-              <!-- Header-Leiste -->
+              <rect x="30" y="4" width="58" height="64" rx="4" stroke="rgba(91,163,224,0.45)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
               <rect x="30" y="4" width="58" height="10" rx="4" fill="rgba(0,73,141,0.1)"/>
-              <rect x="36" y="7" width="20" height="4" rx="2" fill="rgba(91,163,224,0.15)"/>
-              <!-- Zeilen -->
-              <line x1="36" y1="20" x2="82" y2="20" stroke="rgba(91,163,224,0.2)" stroke-width="1"/>
+              <rect x="36" y="7" width="20" height="4" rx="2" fill="rgba(91,163,224,0.28)"/>
+              <line x1="36" y1="20" x2="82" y2="20" stroke="rgba(91,163,224,0.35)" stroke-width="1"/>
               <line x1="36" y1="26" x2="78" y2="26" stroke="rgba(91,163,224,0.12)" stroke-width="1"/>
               <line x1="36" y1="32" x2="75" y2="32" stroke="rgba(91,163,224,0.12)" stroke-width="1"/>
-              <line x1="36" y1="38" x2="80" y2="38" stroke="rgba(91,163,224,0.1)" stroke-width="1"/>
-              <!-- Preis-Highlight -->
-              <rect x="36" y="46" width="46" height="14" rx="3" fill="rgba(173,193,48,0.08)" stroke="rgba(173,193,48,0.2)" stroke-width="0.8"/>
-              <text x="42" y="56" font-family="Ubuntu" font-size="9" font-weight="700" fill="rgba(173,193,48,0.5)">345,20 EUR</text>
-              <!-- Pfeil + PDF -->
-              <path d="M96 36 L115 36" stroke="rgba(91,163,224,0.2)" stroke-width="1" stroke-dasharray="3 2">
+              <line x1="36" y1="38" x2="80" y2="38" stroke="rgba(91,163,224,0.2)" stroke-width="1"/>
+              <rect x="36" y="46" width="46" height="14" rx="3" fill="rgba(173,193,48,0.08)" stroke="rgba(173,193,48,0.3)" stroke-width="0.8"/>
+              <text x="42" y="56" font-family="Ubuntu" font-size="9" font-weight="700" fill="rgba(173,193,48,0.7)">345,20 EUR</text>
+              <path d="M96 36 L115 36" stroke="rgba(91,163,224,0.35)" stroke-width="1" stroke-dasharray="3 2">
                 <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite"/>
               </path>
               <g class="anim-float">
-                <rect x="120" y="10" width="48" height="56" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.25)" stroke-width="1"/>
+                <rect x="120" y="10" width="48" height="56" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
                 <rect x="120" y="10" width="48" height="12" rx="4" fill="rgba(0,73,141,0.12)"/>
                 <text x="128" y="19" font-family="Ubuntu" font-size="7" font-weight="700" fill="rgba(91,163,224,0.5)">PDF</text>
-                <!-- Mini chart -->
-                <rect x="127" y="30" width="8" height="16" rx="1.5" fill="rgba(91,163,224,0.1)" stroke="rgba(91,163,224,0.15)" stroke-width="0.5"/>
+                <rect x="127" y="30" width="8" height="16" rx="1.5" fill="rgba(91,163,224,0.2)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
                 <rect x="138" y="24" width="8" height="22" rx="1.5" fill="rgba(91,163,224,0.13)" stroke="rgba(91,163,224,0.18)" stroke-width="0.5"/>
-                <rect x="149" y="28" width="8" height="18" rx="1.5" fill="rgba(91,163,224,0.1)" stroke="rgba(91,163,224,0.15)" stroke-width="0.5"/>
-                <!-- Check -->
-                <path d="M137 56l4 4 8-8" stroke="rgba(173,193,48,0.5)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                <rect x="149" y="28" width="8" height="18" rx="1.5" fill="rgba(91,163,224,0.2)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
+                <path d="M137 56l4 4 8-8" stroke="rgba(173,193,48,0.7)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
               </g>
             </svg>
           </div>
@@ -796,63 +778,45 @@
         </div>
       </div>
 
-      <!-- STEP 3 — Smartphone-Mockup mit Link -->
-      <div class="step step-pill g-s3">
-        <div class="pill-head">
+      <!-- STEP 3 — Same card type, light border variant -->
+      <div class="step step-compact light-border g-s3">
+        <div class="step-inner">
+          <div class="step-illust">
+            <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Smartphone compact -->
+              <rect x="70" y="2" width="60" height="68" rx="10" stroke="rgba(184,207,227,0.35)" stroke-width="1.5" fill="rgba(184,207,227,0.04)"/>
+              <rect x="88" y="4" width="24" height="4" rx="2" fill="rgba(184,207,227,0.12)"/>
+              <rect x="74" y="10" width="52" height="50" rx="3" fill="rgba(184,207,227,0.03)"/>
+              <!-- Link-Icon -->
+              <path d="M91 30 a6 6 0 0 1 6 -6 h3 a6 6 0 0 1 0 12 h-1.5" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M109 38 a6 6 0 0 1 -6 6 h-3 a6 6 0 0 1 0 -12 h1.5" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <line x1="98" y1="34" x2="102" y2="30" stroke="rgba(184,207,227,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+              <!-- Pulse rings -->
+              <circle cx="100" cy="35" r="16" stroke="rgba(184,207,227,0.12)" stroke-width="0.5" fill="none">
+                <animate attributeName="r" values="16;22;16" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Signal bars -->
+              <rect x="42" y="40" width="3" height="8" rx="1" fill="rgba(184,207,227,0.15)"/>
+              <rect x="47" y="36" width="3" height="12" rx="1" fill="rgba(184,207,227,0.2)"/>
+              <rect x="52" y="32" width="3" height="16" rx="1" fill="rgba(184,207,227,0.25)"/>
+              <!-- Flying dot -->
+              <circle r="2.5" fill="rgba(184,207,227,0.5)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" path="M40,48 Q70,18 100,34"/>
+              </circle>
+              <!-- Home button -->
+              <rect x="94" y="63" width="12" height="3" rx="1.5" fill="rgba(184,207,227,0.1)"/>
+            </svg>
+          </div>
           <div class="step-num">3</div>
           <h3>Kunden-Zugang</h3>
-        </div>
-        <p>Persönlicher Link — der Kunde erkundet das Angebot in Ruhe selbst.</p>
-        <div class="step-illust">
-          <svg viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Smartphone -->
-            <rect x="50" y="2" width="60" height="76" rx="10" stroke="rgba(184,207,227,0.35)" stroke-width="1.5" fill="rgba(184,207,227,0.04)"/>
-            <!-- Notch -->
-            <rect x="68" y="4" width="24" height="4" rx="2" fill="rgba(184,207,227,0.12)"/>
-            <!-- Screen area -->
-            <rect x="54" y="12" width="52" height="56" rx="3" fill="rgba(184,207,227,0.03)"/>
-            <!-- Link-Icon gross im Screen -->
-            <path d="M71 34 a7 7 0 0 1 7 -7 h4 a7 7 0 0 1 0 14 h-2" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M89 42 a7 7 0 0 1 -7 7 h-4 a7 7 0 0 1 0 -14 h2" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <!-- Diagonal verbindung -->
-            <line x1="78" y1="38" x2="82" y2="34" stroke="rgba(184,207,227,0.3)" stroke-width="1.2" stroke-linecap="round"/>
-            <!-- Pulse rings um das Phone -->
-            <circle cx="80" cy="40" r="18" stroke="rgba(184,207,227,0.12)" stroke-width="0.5" fill="none">
-              <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="80" cy="40" r="22" stroke="rgba(184,207,227,0.08)" stroke-width="0.5" fill="none">
-              <animate attributeName="r" values="22;30;22" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.2;0;0.2" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Signal-Balken links vom Phone -->
-            <rect x="28" y="48" width="3" height="8" rx="1" fill="rgba(184,207,227,0.15)"/>
-            <rect x="33" y="44" width="3" height="12" rx="1" fill="rgba(184,207,227,0.2)"/>
-            <rect x="38" y="40" width="3" height="16" rx="1" fill="rgba(184,207,227,0.25)"/>
-            <!-- Fliegender Punkt: Berater zu Kunde -->
-            <circle r="2.5" fill="rgba(184,207,227,0.5)">
-              <animateMotion dur="2.5s" repeatCount="indefinite" path="M20,55 Q50,20 80,38"/>
-            </circle>
-            <!-- Home-Button -->
-            <rect x="74" y="71" width="12" height="3" rx="1.5" fill="rgba(184,207,227,0.1)"/>
-          </svg>
+          <p>Persönlicher Link — der Kunde erkundet das Angebot in Ruhe selbst.</p>
         </div>
       </div>
 
-      <!-- Arrow row -->
-      <div class="g-arrow1" style="display:flex; justify-content:center; align-items:center;">
-        <svg width="500" height="16" viewBox="0 0 500 16" fill="none">
-          <line x1="50" y1="8" x2="450" y2="8" stroke="rgba(91,163,224,0.06)" stroke-width="1" stroke-dasharray="4 3"/>
-          <path d="M248 4l4 4-4 4" stroke="rgba(91,163,224,0.1)" stroke-width="1" fill="none" stroke-linecap="round"/>
-          <circle r="2" fill="rgba(91,163,224,0.25)">
-            <animateMotion dur="4s" repeatCount="indefinite" path="M50,8 L450,8"/>
-          </circle>
-        </svg>
-      </div>
+      <!-- ROW 2: Step 4 (2 cols) + CTA (1 col) -->
 
-      <!-- ROW 3: Step 4 -->
-
-      <!-- STEP 4 — Upload zone, größere Illustration -->
+      <!-- STEP 4 — Upload zone -->
       <div class="step step-upload g-s4">
         <div class="step-num">4</div>
         <div class="step-text">
@@ -862,23 +826,23 @@
         <div class="step-illust">
           <svg viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Cloud -->
-            <path d="M18 38 a12 12 0 0 1 2-22 a16 16 0 0 1 28 4 a10 10 0 0 1 0 18z" fill="rgba(0,73,141,0.06)" stroke="rgba(91,163,224,0.25)" stroke-width="1"/>
+            <path d="M18 38 a12 12 0 0 1 2-22 a16 16 0 0 1 28 4 a10 10 0 0 1 0 18z" fill="rgba(0,73,141,0.06)" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
             <!-- Dokument das hochfliegt -->
             <g class="anim-float">
-              <rect x="24" y="24" width="18" height="22" rx="2" stroke="rgba(91,163,224,0.3)" stroke-width="1" fill="rgba(0,73,141,0.08)"/>
-              <line x1="28" y1="30" x2="38" y2="30" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
-              <line x1="28" y1="34" x2="36" y2="34" stroke="rgba(91,163,224,0.15)" stroke-width="0.8"/>
-              <line x1="28" y1="38" x2="34" y2="38" stroke="rgba(91,163,224,0.1)" stroke-width="0.8"/>
+              <rect x="24" y="24" width="18" height="22" rx="2" stroke="rgba(91,163,224,0.45)" stroke-width="1" fill="rgba(0,73,141,0.08)"/>
+              <line x1="28" y1="30" x2="38" y2="30" stroke="rgba(91,163,224,0.35)" stroke-width="0.8"/>
+              <line x1="28" y1="34" x2="36" y2="34" stroke="rgba(91,163,224,0.28)" stroke-width="0.8"/>
+              <line x1="28" y1="38" x2="34" y2="38" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
             </g>
             <!-- Upload-Pfeil -->
             <path d="M33 56V48" stroke="rgba(91,163,224,0.45)" stroke-width="2" stroke-linecap="round"/>
             <path d="M28 52l5-5 5 5" stroke="rgba(91,163,224,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <!-- Animierte Partikel -->
-            <circle cx="20" cy="50" r="1" fill="rgba(91,163,224,0.3)">
+            <circle cx="20" cy="50" r="1" fill="rgba(91,163,224,0.45)">
               <animate attributeName="cy" values="54;42;54" dur="2.5s" repeatCount="indefinite"/>
               <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="46" cy="48" r="1" fill="rgba(91,163,224,0.3)">
+            <circle cx="46" cy="48" r="1" fill="rgba(91,163,224,0.45)">
               <animate attributeName="cy" values="52;40;52" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
               <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
             </circle>
@@ -890,27 +854,26 @@
       <div class="g-cta">
         <div class="cta-box">
           <h3>Die Technik steht.<br>Für <span class="green">Schritt 5</span><br>brauchen wir Sie.</h3>
-          <p>Wir brauchen Zugang zur Schnittstelle für die Risikoprüfung. Ein Gespräch, 30 Minuten — danach wissen beide Seiten, wie die Strecke für Ihre Tarife läuft.</p>
+          <p>Ein Gespräch, 30 Minuten — danach wissen beide Seiten, wie die Strecke für Ihre Tarife läuft.</p>
           <div class="qr-placeholder">
-            <svg viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg"><path d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM10,0H11V1H10zM13,0H14V1H13zM14,0H15V1H14zM15,0H16V1H15zM16,0H17V1H16zM17,0H18V1H17zM18,0H19V1H18zM19,0H20V1H19zM22,0H23V1H22zM23,0H24V1H23zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM0,1H1V2H0zM6,1H7V2H6zM8,1H9V2H8zM9,1H10V2H9zM10,1H11V2H10zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM16,1H17V2H16zM18,1H19V2H18zM22,1H23V2H22zM28,1H29V2H28zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM8,2H9V3H8zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM20,2H21V3H20zM22,2H23V3H22zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM28,2H29V3H28zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM9,3H10V4H9zM12,3H13V4H12zM13,3H14V4H13zM15,3H16V4H15zM16,3H17V4H16zM18,3H19V4H18zM19,3H20V4H19zM20,3H21V4H20zM22,3H23V4H22zM24,3H25V4H24zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM8,4H9V5H8zM9,4H10V5H9zM10,4H11V5H10zM12,4H13V5H12zM14,4H15V5H14zM15,4H16V5H15zM16,4H17V5H16zM17,4H18V5H17zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM28,4H29V5H28zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM12,5H13V6H12zM15,5H16V6H15zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM22,5H23V6H22zM28,5H29V6H28zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM25,6H26V7H25zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM8,7H9V8H8zM10,7H11V8H10zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM16,7H17V8H16zM17,7H18V8H17zM18,7H19V8H18zM19,7H20V8H19zM0,8H1V9H0zM1,8H2V9H1zM3,8H4V9H3zM6,8H7V9H6zM7,8H8V9H7zM11,8H12V9H11zM12,8H13V9H12zM14,8H15V9H14zM20,8H21V9H20zM22,8H23V9H22zM23,8H24V9H23zM24,8H25V9H24zM26,8H27V9H26zM27,8H28V9H27zM0,9H1V10H0zM1,9H2V10H1zM3,9H4V10H3zM4,9H5V10H4zM5,9H6V10H5zM9,9H10V10H9zM11,9H12V10H11zM12,9H13V10H12zM13,9H14V10H13zM16,9H17V10H16zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM25,9H26V10H25zM28,9H29V10H28zM0,10H1V11H0zM1,10H2V11H1zM4,10H5V11H4zM5,10H6V11H5zM6,10H7V11H6zM11,10H12V11H11zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM16,10H17V11H16zM19,10H20V11H19zM23,10H24V11H23zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM1,11H2V12H1zM3,11H4V12H3zM4,11H5V12H4zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM10,11H11V12H10zM11,11H12V12H11zM12,11H13V12H12zM13,11H14V12H13zM15,11H16V12H15zM21,11H22V12H21zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM26,11H27V12H26zM27,11H28V12H27zM0,12H1V13H0zM1,12H2V13H1zM4,12H5V13H4zM6,12H7V13H6zM8,12H9V13H8zM10,12H11V13H10zM11,12H12V13H11zM14,12H15V13H14zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM2,13H3V14H2zM3,13H4V14H3zM4,13H5V14H4zM11,13H12V14H11zM13,13H14V14H13zM14,13H15V14H14zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM1,14H2V15H1zM3,14H4V15H3zM6,14H7V15H6zM11,14H12V15H11zM13,14H14V15H13zM14,14H15V15H14zM16,14H17V15H16zM21,14H22V15H21zM22,14H23V15H22zM23,14H24V15H23zM25,14H26V15H25zM26,14H27V15H26zM27,14H28V15H27zM28,14H29V15H28zM0,15H1V16H0zM1,15H2V16H1zM2,15H3V16H2zM4,15H5V16H4zM5,15H6V16H5zM9,15H10V16H9zM11,15H12V16H11zM16,15H17V16H16zM17,15H18V16H17zM20,15H21V16H20zM25,15H26V16H25zM27,15H28V16H27zM3,16H4V17H3zM6,16H7V17H6zM7,16H8V17H7zM12,16H13V17H12zM13,16H14V17H13zM15,16H16V17H15zM17,16H18V17H17zM20,16H21V17H20zM21,16H22V17H21zM23,16H24V17H23zM27,16H28V17H27zM1,17H2V18H1zM3,17H4V18H3zM4,17H5V18H4zM8,17H9V18H8zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM13,17H14V18H13zM14,17H15V18H14zM18,17H19V18H18zM22,17H23V18H22zM23,17H24V18H23zM25,17H26V18H25zM28,17H29V18H28zM0,18H1V19H0zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM6,18H7V19H6zM8,18H9V19H8zM9,18H10V19H9zM11,18H12V19H11zM12,18H13V19H12zM14,18H15V19H14zM16,18H17V19H16zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM27,18H28V19H27zM28,18H29V19H28zM2,19H3V20H2zM3,19H4V20H3zM4,19H5V20H4zM7,19H8V20H7zM9,19H10V20H9zM12,19H13V20H12zM14,19H15V20H14zM15,19H16V20H15zM17,19H18V20H17zM20,19H21V20H20zM21,19H22V20H21zM23,19H24V20H23zM24,19H25V20H24zM27,19H28V20H27zM28,19H29V20H28zM0,20H1V21H0zM3,20H4V21H3zM6,20H7V21H6zM7,20H8V21H7zM9,20H10V21H9zM10,20H11V21H10zM15,20H16V21H15zM16,20H17V21H16zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM26,20H27V21H26zM8,21H9V22H8zM10,21H11V22H10zM11,21H12V22H11zM14,21H15V22H14zM16,21H17V22H16zM17,21H18V22H17zM20,21H21V22H20zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM28,21H29V22H28zM0,22H1V23H0zM1,22H2V23H1zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM16,22H17V23H16zM20,22H21V23H20zM22,22H23V23H22zM24,22H25V23H24zM27,22H28V23H27zM0,23H1V24H0zM6,23H7V24H6zM9,23H10V24H9zM14,23H15V24H14zM15,23H16V24H15zM16,23H17V24H16zM18,23H19V24H18zM20,23H21V24H20zM24,23H25V24H24zM25,23H26V24H25zM26,23H27V24H26zM0,24H1V25H0zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM6,24H7V25H6zM10,24H11V25H10zM12,24H13V25H12zM16,24H17V25H16zM17,24H18V25H17zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM27,24H28V25H27zM28,24H29V25H28zM0,25H1V26H0zM2,25H3V26H2zM3,25H4V26H3zM4,25H5V26H4zM6,25H7V26H6zM8,25H9V26H8zM9,25H10V26H9zM10,25H11V26H10zM11,25H12V26H11zM12,25H13V26H12zM17,25H18V26H17zM18,25H19V26H18zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM0,26H1V27H0zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM6,26H7V27H6zM9,26H10V27H9zM12,26H13V27H12zM18,26H19V27H18zM19,26H20V27H19zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM28,26H29V27H28zM0,27H1V28H0zM6,27H7V28H6zM8,27H9V28H8zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM14,27H15V28H14zM17,27H18V28H17zM20,27H21V28H20zM21,27H22V28H21zM23,27H24V28H23zM27,27H28V28H27zM0,28H1V29H0zM1,28H2V29H1zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM9,28H10V29H9zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM14,28H15V29H14zM17,28H18V29H17zM20,28H21V29H20zM21,28H22V29H21zM24,28H25V29H24zM27,28H28V29H27z" fill="rgba(255,255,255,0.9)" fill-rule="nonzero" stroke="none"/></svg>
+            <svg viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg"><path d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM10,0H11V1H10zM13,0H14V1H13zM14,0H15V1H14zM15,0H16V1H15zM16,0H17V1H16zM17,0H18V1H17zM18,0H19V1H18zM19,0H20V1H19zM22,0H23V1H22zM23,0H24V1H23zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM0,1H1V2H0zM6,1H7V2H6zM8,1H9V2H8zM9,1H10V2H9zM10,1H11V2H10zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM16,1H17V2H16zM18,1H19V2H18zM22,1H23V2H22zM28,1H29V2H28zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM8,2H9V3H8zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM20,2H21V3H20zM22,2H23V3H22zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM28,2H29V3H28zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM9,3H10V4H9zM12,3H13V4H12zM13,3H14V4H13zM15,3H16V4H15zM16,3H17V4H16zM18,3H19V4H18zM19,3H20V4H19zM20,3H21V4H20zM22,3H23V4H22zM24,3H25V4H24zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM8,4H9V5H8zM9,4H10V5H9zM10,4H11V5H10zM12,4H13V5H12zM14,4H15V5H14zM15,4H16V5H15zM16,4H17V5H16zM17,4H18V5H17zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM28,4H29V5H28zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM12,5H13V6H12zM15,5H16V6H15zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM22,5H23V6H22zM28,5H29V6H28zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM25,6H26V7H25zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM8,7H9V8H8zM10,7H11V8H10zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM16,7H17V8H16zM17,7H18V8H17zM18,7H19V8H18zM19,7H20V8H19zM0,8H1V9H0zM1,8H2V9H1zM3,8H4V9H3zM6,8H7V9H6zM7,8H8V9H7zM11,8H12V9H11zM12,8H13V9H12zM14,8H15V9H14zM20,8H21V9H20zM22,8H23V9H22zM23,8H24V9H23zM24,8H25V9H24zM26,8H27V9H26zM27,8H28V9H27zM0,9H1V10H0zM1,9H2V10H1zM3,9H4V10H3zM4,9H5V10H4zM5,9H6V10H5zM9,9H10V10H9zM11,9H12V10H11zM12,9H13V10H12zM13,9H14V10H13zM16,9H17V10H16zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM25,9H26V10H25zM28,9H29V10H28zM0,10H1V11H0zM1,10H2V11H1zM4,10H5V11H4zM5,10H6V11H5zM6,10H7V11H6zM11,10H12V11H11zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM16,10H17V11H16zM19,10H20V11H19zM23,10H24V11H23zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM1,11H2V12H1zM3,11H4V12H3zM4,11H5V12H4zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM10,11H11V12H10zM11,11H12V12H11zM12,11H13V12H12zM13,11H14V12H13zM15,11H16V12H15zM21,11H22V12H21zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM26,11H27V12H26zM27,11H28V12H27zM0,12H1V13H0zM1,12H2V13H1zM4,12H5V13H4zM6,12H7V13H6zM8,12H9V13H8zM10,12H11V13H10zM11,12H12V13H11zM14,12H15V13H14zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM2,13H3V14H2zM3,13H4V14H3zM4,13H5V14H4zM11,13H12V14H11zM13,13H14V14H13zM14,13H15V14H14zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM1,14H2V15H1zM3,14H4V15H3zM6,14H7V15H6zM11,14H12V15H11zM13,14H14V15H13zM14,14H15V15H14zM16,14H17V15H16zM21,14H22V15H21zM22,14H23V15H22zM23,14H24V15H23zM25,14H26V15H25zM26,14H27V15H26zM27,14H28V15H27zM28,14H29V15H28zM0,15H1V16H0zM1,15H2V16H1zM2,15H3V16H2zM4,15H5V16H4zM5,15H6V16H5zM9,15H10V16H9zM11,15H12V16H11zM16,15H17V16H16zM17,15H18V16H17zM20,15H21V16H20zM25,15H26V16H25zM27,15H28V16H27zM3,16H4V17H3zM6,16H7V17H6zM7,16H8V17H7zM12,16H13V17H12zM13,16H14V17H13zM15,16H16V17H15zM17,16H18V17H17zM20,16H21V17H20zM21,16H22V17H21zM23,16H24V17H23zM27,16H28V17H27zM1,17H2V18H1zM3,17H4V18H3zM4,17H5V18H4zM8,17H9V18H8zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM13,17H14V18H13zM14,17H15V18H14zM18,17H19V18H18zM22,17H23V18H22zM23,17H24V18H23zM25,17H26V18H25zM28,17H29V18H28zM0,18H1V19H0zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM6,18H7V19H6zM8,18H9V19H8zM9,18H10V19H9zM11,18H12V19H11zM12,18H13V19H12zM14,18H15V19H14zM16,18H17V19H16zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM27,18H28V19H27zM28,18H29V19H28zM2,19H3V20H2zM3,19H4V20H3zM4,19H5V20H4zM7,19H8V20H7zM9,19H10V20H9zM12,19H13V20H12zM14,19H15V20H14zM15,19H16V20H15zM17,19H18V20H17zM20,19H21V20H20zM21,19H22V20H21zM23,19H24V20H23zM24,19H25V20H24zM27,19H28V20H27zM28,19H29V20H28zM0,20H1V21H0zM3,20H4V21H3zM6,20H7V21H6zM7,20H8V21H7zM9,20H10V21H9zM10,20H11V21H10zM15,20H16V21H15zM16,20H17V21H16zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM26,20H27V21H26zM8,21H9V22H8zM10,21H11V22H10zM11,21H12V22H11zM14,21H15V22H14zM16,21H17V22H16zM17,21H18V22H17zM20,21H21V22H20zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM28,21H29V22H28zM0,22H1V23H0zM1,22H2V23H1zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM16,22H17V23H16zM20,22H23V23H20zM24,22H25V23H24zM27,22H28V23H27zM0,23H1V24H0zM6,23H7V24H6zM9,23H10V24H9zM14,23H15V24H14zM15,23H16V24H15zM16,23H17V24H16zM18,23H19V24H18zM20,23H21V24H20zM24,23H25V24H24zM25,23H26V24H25zM26,23H27V24H26zM0,24H1V25H0zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM6,24H7V25H6zM10,24H11V25H10zM12,24H13V25H12zM16,24H17V25H16zM17,24H18V25H17zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM27,24H28V25H27zM28,24H29V25H28zM0,25H1V26H0zM2,25H3V26H2zM3,25H4V26H3zM4,25H5V26H4zM6,25H7V26H6zM8,25H9V26H8zM9,25H10V26H9zM10,25H11V26H10zM11,25H12V26H11zM12,25H13V26H12zM17,25H18V26H17zM18,25H19V26H18zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM0,26H1V27H0zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM6,26H7V27H6zM9,26H10V27H9zM12,26H13V27H12zM18,26H19V27H18zM19,26H20V27H19zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM28,26H29V27H28zM0,27H1V28H0zM6,27H7V28H6zM8,27H9V28H8zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM14,27H15V28H14zM17,27H18V28H17zM20,27H21V28H20zM21,27H22V28H21zM23,27H24V28H23zM27,27H28V28H27zM0,28H1V29H0zM1,28H2V29H1zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM9,28H10V29H9zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM14,28H15V29H14zM17,28H18V29H17zM20,28H21V29H20zM21,28H22V29H21zM24,28H25V29H24zM27,28H28V29H27z" fill="rgba(255,255,255,0.9)" fill-rule="nonzero" stroke="none"/></svg>
             <span>pkv-beratungstool.vercel.app</span>
           </div>
         </div>
       </div>
 
-      <!-- ROW 4: Step 5 HERO -->
+      <!-- ROW 3: Step 5 HERO -->
 
       <!-- STEP 5 — HERO (NICHT VERAENDERT) -->
       <div class="step step-hero g-s5">
         <div class="hero-glow"></div>
         <div class="hero-illust">
           <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="32" fill="rgba(173,193,48,0.04)" stroke="rgba(173,193,48,0.2)" stroke-width="1"/>
+            <circle cx="50" cy="50" r="32" fill="rgba(173,193,48,0.04)" stroke="rgba(173,193,48,0.3)" stroke-width="1"/>
             <circle cx="50" cy="50" r="22" fill="none" stroke="rgba(173,193,48,0.1)" stroke-width="0.5" stroke-dasharray="3 3">
               <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="30s" repeatCount="indefinite"/>
             </circle>
-            <!-- Neural nodes -->
-            <circle cx="50" cy="36" r="4" fill="rgba(173,193,48,0.2)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
+            <circle cx="50" cy="36" r="4" fill="rgba(173,193,48,0.3)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
               <animate attributeName="r" values="4;4.8;4" dur="3s" repeatCount="indefinite"/>
             </circle>
             <circle cx="36" cy="56" r="3.5" fill="rgba(173,193,48,0.15)" stroke="rgba(173,193,48,0.3)" stroke-width="0.8">
@@ -921,21 +884,17 @@
             </circle>
             <circle cx="44" cy="66" r="3" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8"/>
             <circle cx="56" cy="66" r="3" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8"/>
-            <!-- Neural connections -->
             <line x1="50" y1="40" x2="38" y2="53" stroke="rgba(173,193,48,0.15)" stroke-width="0.8"/>
             <line x1="50" y1="40" x2="62" y2="53" stroke="rgba(173,193,48,0.15)" stroke-width="0.8"/>
             <line x1="38" y1="59" x2="45" y2="63" stroke="rgba(173,193,48,0.12)" stroke-width="0.8"/>
             <line x1="62" y1="59" x2="55" y2="63" stroke="rgba(173,193,48,0.12)" stroke-width="0.8"/>
             <line x1="38" y1="56" x2="62" y2="56" stroke="rgba(173,193,48,0.08)" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <!-- Scanning beam -->
             <rect x="30" y="40" width="40" height="1" rx="0.5" fill="rgba(173,193,48,0.25)">
               <animate attributeName="y" values="30;70;30" dur="4s" repeatCount="indefinite"/>
               <animate attributeName="opacity" values="0;0.4;0" dur="4s" repeatCount="indefinite"/>
             </rect>
-            <!-- Outer orbit dots -->
-            <circle cx="16" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.2)" stroke-width="0.5"/>
-            <circle cx="84" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.2)" stroke-width="0.5"/>
-            <!-- Orbiting dot -->
+            <circle cx="16" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.3)" stroke-width="0.5"/>
+            <circle cx="84" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.3)" stroke-width="0.5"/>
             <circle r="2.5" fill="rgba(173,193,48,0.4)">
               <animateMotion dur="8s" repeatCount="indefinite" path="M50,18 A32,32 0 1,1 49.9,18"/>
             </circle>
@@ -955,34 +914,28 @@
         </div>
       </div>
 
-      <!-- ROW 5: Steps 6, 7 — Illustration OBEN, größer -->
+      <!-- ROW 4: Steps 6, 7 + Final CTA -->
 
       <!-- STEP 6 -->
       <div class="step step-result g-s6">
         <div class="step-inner">
           <div class="step-illust">
             <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Dashboard-Hintergrund -->
-              <rect x="20" y="4" width="160" height="52" rx="6" fill="rgba(91,163,224,0.03)" stroke="rgba(91,163,224,0.1)" stroke-width="0.5"/>
-              <!-- Balkendiagramm -->
+              <rect x="20" y="4" width="160" height="52" rx="6" fill="rgba(91,163,224,0.03)" stroke="rgba(91,163,224,0.2)" stroke-width="0.5"/>
               <rect x="35" y="34" width="16" height="18" rx="2" fill="rgba(91,163,224,0.12)" stroke="rgba(91,163,224,0.22)" stroke-width="0.8"/>
-              <rect x="57" y="22" width="16" height="30" rx="2" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.25)" stroke-width="0.8"/>
+              <rect x="57" y="22" width="16" height="30" rx="2" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.4)" stroke-width="0.8"/>
               <rect x="79" y="14" width="16" height="38" rx="2" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8">
                 <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
               </rect>
-              <!-- Prozentzahl -->
               <text x="82" y="11" font-family="Ubuntu" font-size="6" font-weight="700" fill="rgba(173,193,48,0.45)">+12%</text>
-              <!-- Trennlinie -->
-              <line x1="110" y1="10" x2="110" y2="50" stroke="rgba(91,163,224,0.08)" stroke-width="0.5"/>
-              <!-- Zielscheibe rechts -->
+              <line x1="110" y1="10" x2="110" y2="50" stroke="rgba(91,163,224,0.16)" stroke-width="0.5"/>
               <circle cx="145" cy="30" r="18" stroke="rgba(91,163,224,0.12)" stroke-width="0.8" fill="none"/>
-              <circle cx="145" cy="30" r="12" stroke="rgba(91,163,224,0.1)" stroke-width="0.5" fill="none"/>
-              <circle cx="145" cy="30" r="6" stroke="rgba(173,193,48,0.2)" stroke-width="0.8" fill="none"/>
+              <circle cx="145" cy="30" r="12" stroke="rgba(91,163,224,0.2)" stroke-width="0.5" fill="none"/>
+              <circle cx="145" cy="30" r="6" stroke="rgba(173,193,48,0.3)" stroke-width="0.8" fill="none"/>
               <circle cx="145" cy="30" r="2.5" fill="rgba(173,193,48,0.35)">
                 <animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite"/>
               </circle>
-              <!-- Euro-Label -->
-              <text x="130" y="52" font-family="Ubuntu" font-size="6" font-weight="500" fill="rgba(91,163,224,0.25)">EUR exakt</text>
+              <text x="130" y="52" font-family="Ubuntu" font-size="6" font-weight="500" fill="rgba(91,163,224,0.4)">EUR exakt</text>
             </svg>
           </div>
           <div class="step-num">6</div>
@@ -996,29 +949,22 @@
         <div class="step-inner">
           <div class="step-illust">
             <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Dokument-Hintergrund -->
-              <rect x="30" y="2" width="70" height="56" rx="5" stroke="rgba(91,163,224,0.2)" stroke-width="1" fill="rgba(0,73,141,0.05)"/>
-              <!-- Vertrags-Zeilen -->
-              <line x1="38" y1="12" x2="92" y2="12" stroke="rgba(91,163,224,0.15)" stroke-width="0.8"/>
-              <line x1="38" y1="18" x2="88" y2="18" stroke="rgba(91,163,224,0.1)" stroke-width="0.8"/>
-              <line x1="38" y1="24" x2="85" y2="24" stroke="rgba(91,163,224,0.1)" stroke-width="0.8"/>
-              <line x1="38" y1="30" x2="90" y2="30" stroke="rgba(91,163,224,0.08)" stroke-width="0.8"/>
-              <!-- Unterschrift-Linie -->
-              <line x1="38" y1="44" x2="80" y2="44" stroke="rgba(91,163,224,0.25)" stroke-width="1"/>
-              <!-- Animierte Unterschrift -->
-              <path d="M40 43 Q50 36 58 43 Q64 48 72 40" stroke="rgba(173,193,48,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <rect x="30" y="2" width="70" height="56" rx="5" stroke="rgba(91,163,224,0.35)" stroke-width="1" fill="rgba(0,73,141,0.05)"/>
+              <line x1="38" y1="12" x2="92" y2="12" stroke="rgba(91,163,224,0.28)" stroke-width="0.8"/>
+              <line x1="38" y1="18" x2="88" y2="18" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
+              <line x1="38" y1="24" x2="85" y2="24" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
+              <line x1="38" y1="30" x2="90" y2="30" stroke="rgba(91,163,224,0.16)" stroke-width="0.8"/>
+              <line x1="38" y1="44" x2="80" y2="44" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
+              <path d="M40 43 Q50 36 58 43 Q64 48 72 40" stroke="rgba(173,193,48,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round">
                 <animate attributeName="stroke-dasharray" values="0 100;60 100" dur="3s" repeatCount="indefinite"/>
               </path>
-              <!-- Pfeil zum Check -->
-              <path d="M108 30 L125 30" stroke="rgba(91,163,224,0.15)" stroke-width="1" stroke-dasharray="3 2">
+              <path d="M108 30 L125 30" stroke="rgba(91,163,224,0.28)" stroke-width="1" stroke-dasharray="3 2">
                 <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite"/>
               </path>
-              <!-- Grosser Check-Kreis -->
-              <circle cx="148" cy="30" r="18" fill="rgba(173,193,48,0.06)" stroke="rgba(173,193,48,0.2)" stroke-width="1"/>
+              <circle cx="148" cy="30" r="18" fill="rgba(173,193,48,0.06)" stroke="rgba(173,193,48,0.3)" stroke-width="1"/>
               <path d="M138 30l6 6 14-14" stroke="rgba(173,193,48,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
                 <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
               </path>
-              <!-- Glow um Check -->
               <circle cx="148" cy="30" r="22" stroke="rgba(173,193,48,0.08)" stroke-width="0.5" fill="none">
                 <animate attributeName="r" values="22;26;22" dur="3s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" values="0.2;0;0.2" dur="3s" repeatCount="indefinite"/>
@@ -1030,6 +976,8 @@
           <p>Digitale Unterschrift, kein Medienbruch. Fertige Übergabe im richtigen Format für Ihren Innendienst.</p>
         </div>
       </div>
+
+      <!-- CTA entfernt -->
 
     </div>
 
