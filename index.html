@@ -3,992 +3,987 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PKV-Vertriebsstrecke — Kooperationsangebot</title>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>PKV-Vertriebsstrecke — Kooperationsangebot an die UKV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Ubuntu', 'sans-serif'] },
+        colors: {
+          brandBlue: '#00498d',
+          brandGreen: '#adc130',
+          brandLight: '#b8cfe3',
+          inkDeep: '#0a1a33',
+          inkBase: '#0d2346',
+          inkSoft: '#14335f',
+          ocher: '#c9a14a',
+          ocherSoft: '#8c7233',
+          warn: '#c64d3a'
+        }
+      }
+    }
+  }
+</script>
 <style>
   @page { size: A4 portrait; margin: 0; }
   @media print {
     body { background: none !important; padding: 0 !important; }
-    .a4 { box-shadow: none !important; }
+    .page { box-shadow: none !important; break-after: page; page-break-after: always; }
+    .page:last-child { break-after: auto; page-break-after: auto; }
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
 
   body {
     font-family: 'Ubuntu', sans-serif;
     background: #050a12;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    color: #e8eef7;
     min-height: 100vh;
-    padding: 40px 20px;
     -webkit-font-smoothing: antialiased;
+    padding: 32px 16px;
   }
 
-  .a4 {
+  .stage {
+    max-width: 794px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .page {
     width: 794px;
     height: 1123px;
     position: relative;
     overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 30px 100px rgba(0,0,0,0.7);
-  }
-
-  @media (max-width: 820px) {
-    body { padding: 0; }
-    .a4 {
-      width: 100%;
-      height: auto;
-      min-height: 100vh;
-      overflow: visible;
-      border-radius: 0;
-      box-shadow: none;
-    }
-    .bg-base, .bg-glow-center, .bg-glow-top, .bg-noise, .bg-lines {
-      position: fixed;
-    }
-  }
-
-  /* ================================================================
-     Background
-     ================================================================ */
-  .bg-base {
-    position: absolute; inset: 0;
-    background: linear-gradient(175deg, #1a3355 0%, #1e3a60 20%, #21406a 40%, #1c3558 65%, #162c4a 85%, #12243e 100%);
-  }
-
-  .bg-glow-center {
-    position: absolute;
-    top: 62%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 550px; height: 350px;
-    background: radial-gradient(ellipse, rgba(173,193,48,0.05) 0%, rgba(173,193,48,0.015) 40%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .bg-glow-top {
-    position: absolute;
-    top: 5%; left: 30%;
-    width: 400px; height: 300px;
-    background: radial-gradient(ellipse, rgba(184,207,227,0.08) 0%, transparent 65%);
-    border-radius: 50%;
+    border-radius: 6px;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.65);
+    background: radial-gradient(ellipse at 20% 0%, #16345f 0%, #0d2346 38%, #081831 72%, #050f22 100%);
   }
 
   .bg-noise {
-    position: absolute; inset: 0;
-    opacity: 0.02;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 256px;
   }
 
-  .bg-lines {
-    position: absolute; inset: 0;
-    opacity: 0.012;
-    background: repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 40px,
-      rgba(184,207,227,0.5) 40px,
-      rgba(184,207,227,0.5) 41px
-    );
-  }
-
-  .accent-top {
+  .bg-glow {
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #00498d 0%, #adc130 50%, #00498d 100%);
-    z-index: 10;
-  }
-
-  /* ================================================================
-     Content
-     ================================================================ */
-  .content {
-    position: relative;
-    z-index: 5;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 22px 36px 12px;
-  }
-
-  /* ================================================================
-     Header
-     ================================================================ */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-
-  .header-text { flex: 1; }
-
-  .overline {
-    font-size: 10px;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-    color: #adc130;
-    font-weight: 500;
-    margin-bottom: 10px;
-    opacity: 1;
-  }
-
-  .header-text h1 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.32;
-    letter-spacing: -0.3px;
-    max-width: 400px;
-  }
-
-  h1 .accent { color: #adc130; }
-  h1 .light { color: rgba(255,255,255,0.45); font-weight: 300; }
-
-  .header-text .subtitle {
-    margin-top: 5px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.55;
-    max-width: 370px;
-  }
-
-  /* ================================================================
-     Timeline Grid — REDESIGNED: 4 rows, no arrow row
-     Row 1: Steps 1-3 (equal compact cards)
-     Row 2: Step 4 (2col) + CTA (1col)
-     Row 3: Hero (full width)
-     Row 4: Steps 6-7 + CTA right
-     ================================================================ */
-  .timeline {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
-    gap: 8px 10px;
-    position: relative;
-  }
-
-  /* ================================================================
-     Card Types
-     ================================================================ */
-  .step {
-    position: relative;
-    z-index: 2;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .step-inner {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 5px;
-    flex-shrink: 0;
-  }
-
-  .step h3 {
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,1);
-    margin-bottom: 2px;
-    line-height: 1.3;
-  }
-
-  .step p {
-    font-size: 10px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.5;
-  }
-
-  .step-illust {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* --- TYPE A: Compact card (Steps 1, 2, 3) — all same treatment --- */
-  .step-compact {
-    padding: 10px 12px 8px;
-    background: linear-gradient(145deg, rgba(0,73,141,0.28) 0%, rgba(0,73,141,0.14) 100%);
-    border: 1.5px solid rgba(0,73,141,0.5);
-  }
-
-  .step-compact .step-num {
-    background: rgba(0,73,141,0.4);
-    border: 1.5px solid rgba(0,73,141,0.5);
-    color: #7fbfef;
-  }
-
-  .step-compact .step-illust {
-    order: -1;
-    margin-bottom: 6px;
-    padding: 0;
-  }
-
-  .step-compact .step-illust svg {
-    width: 100%;
-    height: 40px;
-  }
-
-  /* Step 3 specific — same card type but lighter border */
-  .step-compact.light-border {
-    background: linear-gradient(135deg, rgba(184,207,227,0.18) 0%, rgba(184,207,227,0.08) 100%);
-    border: 1px solid rgba(184,207,227,0.18);
-  }
-
-  .step-compact.light-border .step-num {
-    background: rgba(184,207,227,0.15);
-    border: 1px solid rgba(184,207,227,0.25);
-    color: #b8cfe3;
-  }
-
-  /* --- TYPE C: Upload zone (Step 4) --- */
-  .step-upload {
-    padding: 10px 14px;
-    background: linear-gradient(135deg, rgba(0,73,141,0.18) 0%, rgba(0,73,141,0.08) 100%);
-    border: 2px dashed rgba(0,73,141,0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .step-upload .step-num {
-    background: rgba(0,73,141,0.2);
-    border: 1px solid rgba(0,73,141,0.3);
-    color: #7fbfef;
-    margin-bottom: 0;
-  }
-
-  .step-upload .step-text { flex: 1; }
-  .step-upload .step-text h3 { margin-bottom: 2px; }
-
-  .step-upload .step-illust svg {
-    width: 54px; height: 54px;
-  }
-
-  /* --- TYPE D: HERO (Step 5) --- */
-  .step-hero {
-    grid-column: 1 / -1;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, rgba(173,193,48,0.1) 0%, rgba(173,193,48,0.03) 50%, rgba(0,73,141,0.05) 100%);
-    border: 1.5px solid rgba(173,193,48,0.25);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .step-hero::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, rgba(173,193,48,0.12), transparent 40%, rgba(0,73,141,0.08));
-    z-index: -1;
-    filter: blur(20px);
-  }
-
-  .step-hero::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(173,193,48,0.4), rgba(173,193,48,0.1), transparent);
-  }
-
-  .hero-illust {
-    width: 70px; height: 70px;
-    flex-shrink: 0;
-  }
-
-  .hero-illust svg {
-    width: 70px; height: 70px;
-  }
-
-  .hero-content { flex: 1; }
-
-  .step-hero .step-num {
-    background: linear-gradient(135deg, rgba(173,193,48,0.3) 0%, rgba(173,193,48,0.15) 100%);
-    border: 1px solid rgba(173,193,48,0.4);
-    color: #adc130;
-    font-size: 11px;
-    width: 26px; height: 26px;
-  }
-
-  .step-hero h3 {
-    font-size: 15px;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-
-  .step-hero p {
-    font-size: 9.5px;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.6;
-    max-width: 380px;
-  }
-
-  .collab-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 6px;
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #adc130;
-    background: linear-gradient(135deg, rgba(173,193,48,0.15) 0%, rgba(173,193,48,0.06) 100%);
-    border: 1px solid rgba(173,193,48,0.25);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  .collab-badge svg {
-    width: 11px; height: 11px;
-  }
-
-  .hero-glow {
-    position: absolute;
-    top: 50%; left: 70px;
+    width: 560px; height: 360px;
+    left: 50%; top: 58%;
     transform: translate(-50%, -50%);
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(173,193,48,0.08) 0%, transparent 70%);
-    animation: hero-pulse 4s ease-in-out infinite;
+    background: radial-gradient(ellipse, rgba(173,193,48,0.08) 0%, rgba(173,193,48,0.02) 45%, transparent 70%);
     pointer-events: none;
   }
 
-  @keyframes hero-pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.15; }
+  .bg-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.025;
+    background-image: repeating-linear-gradient(-45deg, transparent 0 40px, rgba(184,207,227,0.5) 40px 41px);
   }
 
-  /* --- TYPE E: Result cards (Steps 6, 7) --- */
-  .step-result {
-    padding: 8px 12px 8px;
-    background: linear-gradient(145deg, rgba(0,73,141,0.2) 0%, rgba(0,73,141,0.14) 100%);
-    border: 1.5px solid rgba(0,73,141,0.3);
-    display: flex;
-    flex-direction: column;
+  .accent-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #00498d 0%, #adc130 50%, #00498d 100%);
+  }
+
+  .accent-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(184,207,227,0.35) 50%, transparent 100%);
+  }
+
+  /* ==== Zone HEUTE — vergilbtes Altdokument ==== */
+  .zone-today {
+    background:
+      linear-gradient(145deg, rgba(201,161,74,0.14) 0%, rgba(140,114,51,0.08) 100%),
+      linear-gradient(180deg, rgba(20,14,4,0.55) 0%, rgba(20,14,4,0.7) 100%);
+    border: 1px solid rgba(201,161,74,0.35);
+    box-shadow: inset 0 0 40px rgba(140,114,51,0.25), 0 8px 24px rgba(0,0,0,0.35);
     position: relative;
   }
 
-  .step-result::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(91,163,224,0.4), transparent);
+  .zone-today::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse at 25% 10%, rgba(201,161,74,0.15) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 85%, rgba(140,80,30,0.18) 0%, transparent 50%);
+    pointer-events: none;
   }
 
-  .step-result .step-num {
-    background: rgba(0,73,141,0.4);
-    border: 1.5px solid rgba(0,73,141,0.5);
-    color: #7fbfef;
+  .zone-today::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='fn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2' seed='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fn)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
   }
 
-  .step-result .step-illust {
-    order: -1;
-    margin-bottom: 6px;
-    padding: 0;
-  }
-
-  .step-result .step-illust svg {
-    width: 100%;
-    height: 34px;
-  }
-
-  .step-result h3 {
-    font-size: 13px !important;
-    color: rgba(255,255,255,0.95) !important;
-  }
-
-  .step-result p {
-    font-size: 10px !important;
-    color: rgba(255,255,255,0.6) !important;
-  }
-
-  .step-result.final {
-    background: linear-gradient(145deg, rgba(173,193,48,0.08) 0%, rgba(0,73,141,0.12) 100%);
-    border-color: rgba(173,193,48,0.3);
-  }
-
-  .step-result.final::after {
-    background: linear-gradient(90deg, transparent, rgba(173,193,48,0.3), transparent);
-  }
-
-  .step-result.final .step-num {
-    background: rgba(173,193,48,0.3);
-    border-color: rgba(173,193,48,0.3);
-    color: #adc130;
-  }
-
-  /* ================================================================
-     Grid positions — NEW LAYOUT
-     ================================================================ */
-  .g-s1 { grid-column: 1; grid-row: 1; }
-  .g-s2 { grid-column: 2; grid-row: 1; }
-  .g-s3 { grid-column: 3; grid-row: 1; }
-  .g-s4 { grid-column: 1 / -1; grid-row: 2; }
-  .g-s5 { grid-column: 1 / 3; grid-row: 3; }
-  .g-cta { grid-column: 3; grid-row: 3; }
-  .g-s6 { grid-column: 1; grid-row: 4; }
-  .g-s7 { grid-column: 2; grid-row: 4; }
-  .g-final { grid-column: 3; grid-row: 4; }
-
-  .g-cta {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .g-final {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* ================================================================
-     CTA Box
-     ================================================================ */
-  .cta-box {
-    padding: 10px 12px;
-    background: linear-gradient(165deg, rgba(0,73,141,0.15) 0%, rgba(173,193,48,0.05) 100%);
-    border: 1px solid rgba(0,73,141,0.2);
-    border-radius: 16px;
-    text-align: center;
+  .step-today {
     position: relative;
-    overflow: hidden;
+    padding: 6px 8px 6px 28px;
+    color: #efe1bc;
+    font-size: 10.5px;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
   }
 
-  .cta-box::before {
-    content: '';
+  .step-today .num {
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(173,193,48,0.3), transparent);
-  }
-
-  .cta-box h3 {
-    font-size: 13px;
+    left: 4px; top: 6px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(201,161,74,0.2);
+    border: 1px solid rgba(201,161,74,0.55);
+    color: #f2d98a;
+    font-size: 9.5px;
     font-weight: 700;
-    color: #fff;
-    line-height: 1.4;
-    margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: center;
   }
 
-  .cta-box h3 .green { color: #adc130; }
-
-  .cta-box p {
-    font-size: 9px;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.5;
-    margin-bottom: 8px;
+  .step-today .label {
+    color: #f4e5b8;
+    font-weight: 500;
+    font-size: 10.5px;
   }
 
-  .qr-placeholder {
-    width: 70px; height: 70px;
-    margin: 0 auto;
-    border: 1px dashed rgba(255,255,255,0.15);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 5px;
+  .step-today .desc {
+    color: #d6c392;
+    font-size: 9.5px;
+    opacity: 0.85;
+    margin-top: 1px;
   }
 
-  .qr-placeholder svg {
-    width: 48px; height: 48px;
-    fill: rgba(255,255,255,0.9);
+  .step-today.highlight .label {
+    color: #ffd98a;
+    font-weight: 700;
   }
 
-  .qr-placeholder span {
-    font-size: 6.5px;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.3px;
+  .step-today.highlight::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent 0%, #d6a84a 50%, transparent 100%);
   }
 
-  /* ================================================================
-     Final CTA — bottom right cell
-     ================================================================ */
-  .final-cta {
-    padding: 10px 12px;
-    background: linear-gradient(165deg, rgba(173,193,48,0.08) 0%, rgba(0,73,141,0.1) 100%);
-    border: 1.5px solid rgba(173,193,48,0.3);
-    border-radius: 16px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
+  .divider-today {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(173,193,48,0.3), transparent);
+    background: linear-gradient(90deg, transparent 0%, rgba(201,161,74,0.3) 20%, rgba(201,161,74,0.3) 80%, transparent 100%);
+    margin: 2px 0;
   }
 
-  .final-cta .contact-text {
+  /* ==== Zone FLASCHENHALS ==== */
+  .zone-neck {
+    background: linear-gradient(180deg, rgba(198,77,58,0.1) 0%, rgba(10,20,40,0.85) 50%, rgba(198,77,58,0.1) 100%);
+    border: 1px solid rgba(198,77,58,0.35);
+    box-shadow: inset 0 0 30px rgba(198,77,58,0.18), 0 0 40px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .neck-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: #e8a998;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* Sanduhr Animation */
+  .hourglass-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sand-grain {
+    animation: fall 2.4s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(42px); opacity: 0; }
+  }
+
+  .sand-top {
+    animation: drain 14s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  @keyframes drain {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.45); }
+  }
+
+  .sand-bottom {
+    animation: fill 14s ease-in-out infinite;
+    transform-origin: center top;
+  }
+
+  @keyframes fill {
+    0%, 100% { transform: scaleY(0.35); }
+    50% { transform: scaleY(1); }
+  }
+
+  .pulse-ring {
+    animation: pulse 3.2s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; r: 54; }
+    50% { opacity: 0.55; r: 62; }
+  }
+
+  .glow-ambient {
+    animation: ambient 5s ease-in-out infinite;
+  }
+
+  @keyframes ambient {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ==== Zone MORGEN ==== */
+  .zone-tomorrow {
+    background:
+      linear-gradient(160deg, rgba(173,193,48,0.08) 0%, rgba(0,73,141,0.15) 60%, rgba(10,20,40,0.45) 100%),
+      linear-gradient(180deg, rgba(0,30,60,0.4) 0%, rgba(0,20,45,0.55) 100%);
+    border: 1px solid rgba(173,193,48,0.3);
+    box-shadow: inset 0 0 40px rgba(173,193,48,0.08), 0 8px 24px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .zone-tomorrow::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 15%, rgba(173,193,48,0.12) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  .step-tomorrow {
+    position: relative;
+    padding: 7px 8px 7px 30px;
+    color: #dfeaf7;
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
+
+  .step-tomorrow .num {
+    position: absolute;
+    left: 4px; top: 7px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, #1a4478 0%, #00498d 100%);
+    border: 1px solid rgba(184,207,227,0.4);
+    color: #dfeaf7;
     font-size: 10px;
     font-weight: 700;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.4;
+    display: flex; align-items: center; justify-content: center;
   }
 
-  .final-cta .contact-text .green { color: #adc130; }
-
-  .final-cta .contact-sub {
-    font-size: 8px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.4;
+  .step-tomorrow .label {
+    color: #eaf2fb;
+    font-weight: 500;
+    font-size: 10.5px;
   }
 
-  /* ================================================================
-     Footer
-     ================================================================ */
-  .footer {
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .step-tomorrow .desc {
+    color: #a9bcd4;
+    font-size: 9.5px;
+    margin-top: 1px;
   }
 
-  .footer .brand {
-    font-size: 8.5px;
+  .step-tomorrow.pivot {
+    background: linear-gradient(135deg, rgba(173,193,48,0.18) 0%, rgba(173,193,48,0.05) 100%);
+    border-left: 2px solid #adc130;
+    box-shadow: 0 0 20px rgba(173,193,48,0.15);
+    border-radius: 4px;
+    padding: 8px 10px 8px 32px;
+    margin: 4px 0;
+  }
+
+  .step-tomorrow.pivot .num {
+    background: linear-gradient(140deg, #adc130 0%, #7d8f1a 100%);
+    border-color: rgba(255,255,255,0.5);
+    color: #0a1a33;
+    box-shadow: 0 0 12px rgba(173,193,48,0.5);
+  }
+
+  .step-tomorrow.pivot .label {
+    color: #f4fbdf;
     font-weight: 700;
-    color: rgba(255,255,255,0.55);
   }
 
-  .footer .meta {
-    font-size: 7px;
-    color: rgba(255,255,255,0.2);
+  .step-tomorrow.pivot .desc {
+    color: #d5e3a8;
   }
 
-  /* ================================================================
-     Animations
-     ================================================================ */
-  @keyframes float-up {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
+  .pivot-badge {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #0a1a33;
+    background: #adc130;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
   }
 
-  .anim-float {
-    animation: float-up 4s ease-in-out infinite;
+  .divider-tomorrow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(184,207,227,0.18) 30%, rgba(184,207,227,0.18) 70%, transparent 100%);
+    margin: 2px 0;
   }
 
-  @keyframes scan-line {
-    0%, 100% { transform: translateY(0); opacity: 0; }
-    50% { transform: translateY(10px); opacity: 0.6; }
+  .zone-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
   }
 
-  @keyframes pulse-ring {
-    0% { r: 3; opacity: 0.4; }
-    50% { r: 5; opacity: 0.1; }
-    100% { r: 3; opacity: 0.4; }
+  .zone-kicker {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
   }
 
-  /* ================================================================
-     Mobile responsive
-     ================================================================ */
+  /* ==== Seite 2 Kooperationspunkt ==== */
+  .coop-card {
+    background: linear-gradient(160deg, rgba(20,51,95,0.6) 0%, rgba(10,26,51,0.8) 100%);
+    border: 1px solid rgba(184,207,227,0.18);
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .coop-card.ukv {
+    border-left: 3px solid #b8cfe3;
+  }
+
+  .coop-card.valdorin {
+    border-left: 3px solid #00498d;
+  }
+
+  .coop-card.output {
+    border: 2px solid #adc130;
+    box-shadow: 0 0 30px rgba(173,193,48,0.2), inset 0 0 30px rgba(173,193,48,0.05);
+    background: linear-gradient(160deg, rgba(173,193,48,0.12) 0%, rgba(20,51,95,0.7) 100%);
+  }
+
+  .bullet {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .bullet::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 5px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  .flow-arrow {
+    animation: flow 2.5s ease-in-out infinite;
+  }
+
+  @keyframes flow {
+    0%, 100% { opacity: 0.3; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(4px); }
+  }
+
+  /* ==== Mobile Stack ==== */
   @media (max-width: 820px) {
-    .content { padding: 20px 20px 16px; }
-    .header { flex-direction: column; margin-bottom: 16px; }
-    .header-text h1 { font-size: 22px; max-width: none; }
-    .timeline {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      gap: 12px;
+    body { padding: 0; background: #050a12; }
+    .stage { gap: 0; }
+    .page {
+      width: 100%;
+      height: auto;
+      min-height: auto;
+      border-radius: 0;
+      box-shadow: none;
+      padding-bottom: 40px;
     }
-    .g-s1, .g-s2, .g-s3, .g-s4, .g-s5, .g-s6, .g-s7, .g-cta, .g-final {
-      grid-column: 1 !important;
-      grid-row: auto !important;
+    .mobile-stack {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      height: auto !important;
     }
-    .step-hero { flex-direction: column; }
-    .hero-illust { width: 80px; height: 80px; }
-    .hero-illust svg { width: 80px; height: 80px; }
-    .connection-lines { display: none; }
-    .qr-placeholder { width: 90px; height: 90px; }
-    .qr-placeholder svg { width: 60px; height: 60px; }
+    .mobile-stack > * {
+      width: 100% !important;
+      min-height: auto !important;
+    }
+    .hourglass-wrap svg {
+      width: 100px !important;
+      height: 140px !important;
+    }
+    .coop-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+    }
+  }
+
+  /* Gemeinsame Utilities */
+  .meta-pill {
+    display: inline-block;
+    font-size: 8.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: rgba(184,207,227,0.1);
+    color: #b8cfe3;
+    border: 1px solid rgba(184,207,227,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .mono-serif {
+    font-family: 'Ubuntu', serif;
+    font-style: italic;
+  }
+
+  .signature-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,161,74,0.6), transparent);
+    margin-top: 6px;
   }
 </style>
 </head>
 <body>
+<div class="stage">
 
-<div class="a4">
-  <div class="bg-base"></div>
-  <div class="bg-glow-center"></div>
-  <div class="bg-glow-top"></div>
-  <div class="bg-noise"></div>
-  <div class="bg-lines"></div>
-  <div class="accent-top"></div>
+  <!-- ============================================================
+       SEITE 1 — Heute / Flaschenhals / Morgen
+       ============================================================ -->
+  <section class="page" aria-label="Seite 1: Heute versus Morgen">
+    <div class="bg-lines"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-noise"></div>
+    <div class="accent-top"></div>
 
-  <div class="content">
-
-    <!-- HEADER -->
-    <div class="header">
-      <div class="header-text">
-        <div class="overline">Kooperationsangebot an die UKV</div>
-        <h1>Jeder PKV-Interessent<br>digital zum <span class="accent">Abschluss</span>.<br><span class="light">In einem Durchgang.</span></h1>
-        <div class="subtitle">Ein Werkzeug für Ihre Berater. Vom Erstgespräch bis zum unterschriebenen Antrag — ohne Systemwechsel.</div>
+    <!-- Header -->
+    <header style="position: relative; padding: 28px 40px 14px 40px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px;">
+        <div style="flex:1;">
+          <div class="meta-pill" style="margin-bottom:10px;">Kooperationsangebot an die UKV</div>
+          <h1 style="font-size: 26px; font-weight: 700; line-height: 1.15; color: #ffffff; margin: 0;">
+            Die PKV-Beratungsstrecke im<br>
+            Agenturenvertrieb — <span style="color:#adc130;">heute und morgen.</span>
+          </h1>
+          <p style="font-size: 12px; color: #b8cfe3; margin-top: 8px; max-width: 580px; line-height: 1.4;">
+            Ein ehrlicher Blick auf den Status quo, den gemeinsamen Engpass und ein konkretes
+            Zielbild — gebaut auf dem, was wir heute schon können, und auf dem, was nur die UKV kann.
+          </p>
+        </div>
+        <div style="text-align: right; font-size: 9.5px; color: #8ba3c2; min-width: 110px;">
+          <div style="letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: #b8cfe3;">Seite 1 / 2</div>
+          <div style="margin-top: 4px;">Werner Obermeier</div>
+          <div>Bad Endorf · 04/2026</div>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <!-- TIMELINE GRID -->
-    <div class="timeline">
+    <!-- Drei Zonen -->
+    <main class="mobile-stack" style="position: relative; padding: 6px 24px 24px 24px; display: grid; grid-template-columns: 1fr 150px 1fr; gap: 14px; height: 920px;">
 
-      <!-- CONNECTION LINES SVG LAYER -->
-      <svg class="connection-lines" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none;" preserveAspectRatio="none">
-        <defs>
-          <path id="path-1-2" d="M118,80 C160,80 170,80 220,80" fill="none"/>
-          <path id="path-2-3" d="M340,80 C380,80 390,80 450,80" fill="none"/>
-          <path id="path-3-4" d="M470,160 C470,190 200,200 170,220" fill="none"/>
-          <path id="path-4-5" d="M220,270 C220,290 180,310 200,330" fill="none"/>
-          <path id="path-5-6" d="M200,400 C200,420 130,430 118,450" fill="none"/>
-          <path id="path-5-7" d="M330,400 C330,420 340,430 340,450" fill="none"/>
-        </defs>
-
-        <!-- Gestrichelte Linien -->
-        <use href="#path-1-2" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-        <use href="#path-2-3" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-        <use href="#path-3-4" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-        <use href="#path-4-5" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-        <use href="#path-5-6" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-        <use href="#path-5-7" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-
-        <!-- Animierte Punkte -->
-        <circle r="3" fill="rgba(184,207,227,0.4)">
-          <animateMotion dur="10s" begin="0s" repeatCount="indefinite"><mpath href="#path-1-2"/></animateMotion>
-        </circle>
-        <circle r="3" fill="rgba(184,207,227,0.4)">
-          <animateMotion dur="10s" begin="2s" repeatCount="indefinite"><mpath href="#path-2-3"/></animateMotion>
-        </circle>
-        <circle r="3" fill="rgba(184,207,227,0.4)">
-          <animateMotion dur="12s" begin="4s" repeatCount="indefinite"><mpath href="#path-3-4"/></animateMotion>
-        </circle>
-        <circle r="3.5" fill="rgba(173,193,48,0.4)">
-          <animateMotion dur="10s" begin="6s" repeatCount="indefinite"><mpath href="#path-4-5"/></animateMotion>
-        </circle>
-        <circle r="3" fill="rgba(184,207,227,0.4)">
-          <animateMotion dur="10s" begin="8s" repeatCount="indefinite"><mpath href="#path-5-6"/></animateMotion>
-        </circle>
-        <circle r="3" fill="rgba(184,207,227,0.4)">
-          <animateMotion dur="10s" begin="10s" repeatCount="indefinite"><mpath href="#path-5-7"/></animateMotion>
-        </circle>
-      </svg>
-
-      <!-- ROW 1: Steps 1, 2, 3 — all compact equal cards -->
-
-      <!-- STEP 1 -->
-      <div class="step step-compact g-s1">
-        <div class="step-inner">
-          <div class="step-illust">
-            <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Browser-Fenster -->
-              <rect x="20" y="4" width="160" height="64" rx="8" stroke="rgba(91,163,224,0.45)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
-              <rect x="20" y="4" width="160" height="14" rx="8" fill="rgba(0,73,141,0.08)"/>
-              <rect x="20" y="16" width="160" height="1" fill="rgba(91,163,224,0.16)"/>
-              <circle cx="30" cy="11" r="2" fill="rgba(91,163,224,0.4)"/>
-              <circle cx="37" cy="11" r="2" fill="rgba(91,163,224,0.35)"/>
-              <circle cx="44" cy="11" r="2" fill="rgba(91,163,224,0.28)"/>
-              <rect x="54" y="8" width="80" height="6" rx="3" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.12)" stroke-width="0.5"/>
-              <rect x="30" y="22" width="65" height="8" rx="4" fill="rgba(0,73,141,0.15)" stroke="rgba(91,163,224,0.35)" stroke-width="0.5"/>
-              <rect x="30" y="34" width="55" height="8" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
-              <rect x="30" y="46" width="45" height="8" rx="4" fill="rgba(0,73,141,0.07)" stroke="rgba(91,163,224,0.2)" stroke-width="0.5"/>
-              <circle cx="110" cy="26" r="4" fill="rgba(173,193,48,0.3)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
-                <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
-              </circle>
-              <line x1="110" y1="32" x2="110" y2="42" stroke="rgba(91,163,224,0.28)" stroke-width="0.8" stroke-dasharray="2 2"/>
-              <circle cx="110" cy="46" r="3" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
-              <g class="anim-float">
-                <path d="M140 30 l0 14 l4 -4 l6 0 z" fill="rgba(91,163,224,0.35)" stroke="rgba(91,163,224,0.5)" stroke-width="0.5"/>
-              </g>
-              <circle cx="34" cy="58" r="1.5" fill="rgba(91,163,224,0.4)">
-                <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="39" cy="58" r="1.5" fill="rgba(91,163,224,0.4)">
-                <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="44" cy="58" r="1.5" fill="rgba(91,163,224,0.4)">
-                <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
-              </circle>
-            </svg>
+      <!-- ZONE LINKS: HEUTE -->
+      <div class="zone-today" style="border-radius: 6px; padding: 16px 14px; position: relative; display: flex; flex-direction: column;">
+        <div style="position: relative; z-index: 2;">
+          <div class="zone-kicker" style="color: #c9a14a;">Heute · Status Quo</div>
+          <div class="zone-title mono-serif" style="color: #f4e5b8; margin-top: 4px;">
+            So läuft ein PKV-Antrag<br>im Agenturenvertrieb
           </div>
-          <div class="step-num">1</div>
-          <h3>Geführte Beratung</h3>
-          <p>Schritt für Schritt durch alle PKV-Themen — visuell und verständlich.</p>
+          <div class="signature-line"></div>
         </div>
-      </div>
 
-      <!-- STEP 2 -->
-      <div class="step step-compact g-s2">
-        <div class="step-inner">
-          <div class="step-illust">
-            <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="30" y="4" width="58" height="64" rx="4" stroke="rgba(91,163,224,0.45)" stroke-width="1.2" fill="rgba(0,73,141,0.06)"/>
-              <rect x="30" y="4" width="58" height="10" rx="4" fill="rgba(0,73,141,0.1)"/>
-              <rect x="36" y="7" width="20" height="4" rx="2" fill="rgba(91,163,224,0.28)"/>
-              <line x1="36" y1="20" x2="82" y2="20" stroke="rgba(91,163,224,0.35)" stroke-width="1"/>
-              <line x1="36" y1="26" x2="78" y2="26" stroke="rgba(91,163,224,0.12)" stroke-width="1"/>
-              <line x1="36" y1="32" x2="75" y2="32" stroke="rgba(91,163,224,0.12)" stroke-width="1"/>
-              <line x1="36" y1="38" x2="80" y2="38" stroke="rgba(91,163,224,0.2)" stroke-width="1"/>
-              <rect x="36" y="46" width="46" height="14" rx="3" fill="rgba(173,193,48,0.08)" stroke="rgba(173,193,48,0.3)" stroke-width="0.8"/>
-              <text x="42" y="56" font-family="Ubuntu" font-size="9" font-weight="700" fill="rgba(173,193,48,0.7)">345,20 EUR</text>
-              <path d="M96 36 L115 36" stroke="rgba(91,163,224,0.35)" stroke-width="1" stroke-dasharray="3 2">
-                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite"/>
-              </path>
-              <g class="anim-float">
-                <rect x="120" y="10" width="48" height="56" rx="4" fill="rgba(0,73,141,0.1)" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
-                <rect x="120" y="10" width="48" height="12" rx="4" fill="rgba(0,73,141,0.12)"/>
-                <text x="128" y="19" font-family="Ubuntu" font-size="7" font-weight="700" fill="rgba(91,163,224,0.5)">PDF</text>
-                <rect x="127" y="30" width="8" height="16" rx="1.5" fill="rgba(91,163,224,0.2)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
-                <rect x="138" y="24" width="8" height="22" rx="1.5" fill="rgba(91,163,224,0.13)" stroke="rgba(91,163,224,0.18)" stroke-width="0.5"/>
-                <rect x="149" y="28" width="8" height="18" rx="1.5" fill="rgba(91,163,224,0.2)" stroke="rgba(91,163,224,0.28)" stroke-width="0.5"/>
-                <path d="M137 56l4 4 8-8" stroke="rgba(173,193,48,0.7)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-              </g>
-            </svg>
+        <div style="position: relative; z-index: 2; margin-top: 10px; display: flex; flex-direction: column; gap: 1px; flex: 1;">
+          <div class="step-today">
+            <div class="num">1</div>
+            <div class="label">Beratung uneinheitlich</div>
+            <div class="desc">Jeder Berater redet anders, Qualität schwankt.</div>
           </div>
-          <div class="step-num">2</div>
-          <h3>Sofort-Angebot</h3>
-          <p>Tarif zusammenstellen, Preise sofort sehen, PDF direkt mitnehmen.</p>
-        </div>
-      </div>
-
-      <!-- STEP 3 — Same card type, light border variant -->
-      <div class="step step-compact light-border g-s3">
-        <div class="step-inner">
-          <div class="step-illust">
-            <svg viewBox="0 0 200 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Smartphone compact -->
-              <rect x="70" y="2" width="60" height="68" rx="10" stroke="rgba(184,207,227,0.35)" stroke-width="1.5" fill="rgba(184,207,227,0.04)"/>
-              <rect x="88" y="4" width="24" height="4" rx="2" fill="rgba(184,207,227,0.12)"/>
-              <rect x="74" y="10" width="52" height="50" rx="3" fill="rgba(184,207,227,0.03)"/>
-              <!-- Link-Icon -->
-              <path d="M91 30 a6 6 0 0 1 6 -6 h3 a6 6 0 0 1 0 12 h-1.5" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <path d="M109 38 a6 6 0 0 1 -6 6 h-3 a6 6 0 0 1 0 -12 h1.5" stroke="rgba(184,207,227,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <line x1="98" y1="34" x2="102" y2="30" stroke="rgba(184,207,227,0.3)" stroke-width="1.2" stroke-linecap="round"/>
-              <!-- Pulse rings -->
-              <circle cx="100" cy="35" r="16" stroke="rgba(184,207,227,0.12)" stroke-width="0.5" fill="none">
-                <animate attributeName="r" values="16;22;16" dur="3s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite"/>
-              </circle>
-              <!-- Signal bars -->
-              <rect x="42" y="40" width="3" height="8" rx="1" fill="rgba(184,207,227,0.15)"/>
-              <rect x="47" y="36" width="3" height="12" rx="1" fill="rgba(184,207,227,0.2)"/>
-              <rect x="52" y="32" width="3" height="16" rx="1" fill="rgba(184,207,227,0.25)"/>
-              <!-- Flying dot -->
-              <circle r="2.5" fill="rgba(184,207,227,0.5)">
-                <animateMotion dur="2.5s" repeatCount="indefinite" path="M40,48 Q70,18 100,34"/>
-              </circle>
-              <!-- Home button -->
-              <rect x="94" y="63" width="12" height="3" rx="1.5" fill="rgba(184,207,227,0.1)"/>
-            </svg>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">2</div>
+            <div class="label">Vorschlag optisch schwach</div>
+            <div class="desc">PowerPoint, Papier, wirkt nicht hochwertig.</div>
           </div>
-          <div class="step-num">3</div>
-          <h3>Kunden-Zugang</h3>
-          <p>Persönlicher Link — der Kunde erkundet das Angebot in Ruhe selbst.</p>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">3</div>
+            <div class="label">Gesundheitsdaten unvollständig</div>
+            <div class="desc">Kunde weiß Fragen nicht aus dem Kopf — Akte muss her.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">4</div>
+            <div class="label">Akten-Anforderung per Post</div>
+            <div class="desc">E-Mail an Kasse, Papier-Akte kommt nach Wochen.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">5</div>
+            <div class="label">Kunde liefert nach</div>
+            <div class="desc">Scan, Foto, Vorbeibringen — oft Monate später.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">6</div>
+            <div class="label">Berater sichtet manuell</div>
+            <div class="desc">Lateinische Begriffe, fehlendes Medizin-Know-how.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today highlight">
+            <div class="num">7</div>
+            <div class="label">Papierantrag an München</div>
+            <div class="desc">Anonymisiert per Post an die VKB — Ablehnung hätte sonst Folgen.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today highlight">
+            <div class="num">8</div>
+            <div class="label">Rücklauf aus München</div>
+            <div class="desc">Selbstauskunft, Arztanfragen, Zuschläge, Ausschlüsse.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today highlight">
+            <div class="num">9</div>
+            <div class="label">Verhandlungsstrecke mit München</div>
+            <div class="desc">Atteste nachreichen, alles zurück — Kunde liefert wieder.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today">
+            <div class="num">10</div>
+            <div class="label">Finales Angebot nach Monaten</div>
+            <div class="desc">Unterschriftsreife Unterlage — irgendwann.</div>
+          </div>
+          <div class="divider-today"></div>
+          <div class="step-today" style="background: rgba(198,77,58,0.12); border-radius: 3px; margin-top: 2px;">
+            <div class="num" style="background: rgba(198,77,58,0.25); border-color: rgba(198,77,58,0.6); color: #ffb9a8;">11</div>
+            <div class="label" style="color: #ffb9a8;">Kunde springt ab</div>
+            <div class="desc" style="color: #e59d8a;">Zäh, nervenaufreibend, Vertrauensverlust unterwegs.</div>
+          </div>
+        </div>
+
+        <div style="position: relative; z-index: 2; margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(201,161,74,0.35); font-size: 8.5px; color: #c9a14a; font-style: italic; line-height: 1.35;">
+          Bei 95 % der Anträge ohne Vorerkrankungen läuft der Fall durch — aber selten sauber.
         </div>
       </div>
 
-      <!-- ROW 2: Step 4 (2 cols) + CTA (1 col) -->
+      <!-- ZONE MITTE: FLASCHENHALS -->
+      <div class="zone-neck" style="border-radius: 6px; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative;">
 
-      <!-- STEP 4 — Upload zone -->
-      <div class="step step-upload g-s4">
-        <div class="step-num">4</div>
-        <div class="step-text">
-          <h3>Akte hochladen</h3>
-          <p>Krankenversicherungsakte direkt hochladen — kein Scannen, kein Faxen.</p>
+        <div class="neck-label">Der gemeinsame Engpass</div>
+        <div style="font-size: 11px; font-weight: 700; color: #ffe0d6; margin-top: 6px; line-height: 1.25;">
+          Warten auf die<br>Krankenakte
         </div>
-        <div class="step-illust">
-          <svg viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cloud -->
-            <path d="M18 38 a12 12 0 0 1 2-22 a16 16 0 0 1 28 4 a10 10 0 0 1 0 18z" fill="rgba(0,73,141,0.06)" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
-            <!-- Dokument das hochfliegt -->
-            <g class="anim-float">
-              <rect x="24" y="24" width="18" height="22" rx="2" stroke="rgba(91,163,224,0.45)" stroke-width="1" fill="rgba(0,73,141,0.08)"/>
-              <line x1="28" y1="30" x2="38" y2="30" stroke="rgba(91,163,224,0.35)" stroke-width="0.8"/>
-              <line x1="28" y1="34" x2="36" y2="34" stroke="rgba(91,163,224,0.28)" stroke-width="0.8"/>
-              <line x1="28" y1="38" x2="34" y2="38" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
+        <div style="font-size: 9px; color: #d3a79a; margin-top: 2px; line-height: 1.35;">
+          Kundenlieferung
+        </div>
+
+        <!-- Sanduhr SVG -->
+        <div class="hourglass-wrap" style="margin-top: 12px; margin-bottom: 10px;">
+          <svg width="120" height="165" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sanduhr mit rinnendem Sand">
+            <defs>
+              <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#b8cfe3" stop-opacity="0.35"/>
+                <stop offset="50%" stop-color="#b8cfe3" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#b8cfe3" stop-opacity="0.35"/>
+              </linearGradient>
+              <linearGradient id="sandGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e3b866"/>
+                <stop offset="100%" stop-color="#c9a14a"/>
+              </linearGradient>
+              <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#adc130" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#adc130" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="2"/>
+              </filter>
+            </defs>
+
+            <!-- Ambient glow ring -->
+            <circle cx="60" cy="82" r="54" fill="none" stroke="#adc130" stroke-width="0.5" class="pulse-ring" style="opacity: 0.3;"/>
+            <circle cx="60" cy="82" r="70" fill="url(#innerGlow)" class="glow-ambient"/>
+
+            <!-- Rahmen oben / unten -->
+            <rect x="18" y="6" width="84" height="4" rx="1.5" fill="#c9a14a" opacity="0.85"/>
+            <rect x="18" y="155" width="84" height="4" rx="1.5" fill="#c9a14a" opacity="0.85"/>
+
+            <!-- Glas-Kontur Sanduhr -->
+            <path d="M 26 10 L 94 10 L 62 80 L 94 155 L 26 155 L 58 80 Z"
+                  fill="url(#glassGrad)"
+                  stroke="#b8cfe3"
+                  stroke-opacity="0.55"
+                  stroke-width="1.2"/>
+
+            <!-- Sand oben (drain) -->
+            <g class="sand-top">
+              <path d="M 28 12 L 92 12 L 62 78 L 58 78 Z" fill="url(#sandGrad)" opacity="0.9"/>
             </g>
-            <!-- Upload-Pfeil -->
-            <path d="M33 56V48" stroke="rgba(91,163,224,0.45)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M28 52l5-5 5 5" stroke="rgba(91,163,224,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <!-- Animierte Partikel -->
-            <circle cx="20" cy="50" r="1" fill="rgba(91,163,224,0.45)">
-              <animate attributeName="cy" values="54;42;54" dur="2.5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="46" cy="48" r="1" fill="rgba(91,163,224,0.45)">
-              <animate attributeName="cy" values="52;40;52" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
-            </circle>
+
+            <!-- Falling stream -->
+            <rect x="59.3" y="78" width="1.4" height="75" fill="#e3b866" opacity="0.75"/>
+
+            <!-- Einzelne Sandkörner (staffel-animiert) -->
+            <g>
+              <circle cx="60" cy="85" r="0.9" fill="#f0cc7a" class="sand-grain" style="animation-delay: 0s;"/>
+              <circle cx="59.5" cy="90" r="0.8" fill="#e3b866" class="sand-grain" style="animation-delay: 0.3s;"/>
+              <circle cx="60.5" cy="95" r="0.9" fill="#f0cc7a" class="sand-grain" style="animation-delay: 0.6s;"/>
+              <circle cx="59.8" cy="100" r="0.7" fill="#e3b866" class="sand-grain" style="animation-delay: 0.9s;"/>
+              <circle cx="60.2" cy="105" r="0.9" fill="#f0cc7a" class="sand-grain" style="animation-delay: 1.2s;"/>
+              <circle cx="59.6" cy="110" r="0.8" fill="#e3b866" class="sand-grain" style="animation-delay: 1.5s;"/>
+              <circle cx="60.3" cy="115" r="0.9" fill="#f0cc7a" class="sand-grain" style="animation-delay: 1.8s;"/>
+              <circle cx="60.0" cy="120" r="0.7" fill="#e3b866" class="sand-grain" style="animation-delay: 2.1s;"/>
+            </g>
+
+            <!-- Sand unten (fill) -->
+            <g class="sand-bottom">
+              <path d="M 28 153 L 92 153 L 62 82 L 58 82 Z" fill="url(#sandGrad)" opacity="0.85"/>
+            </g>
+
+            <!-- Highlight an Glaskante -->
+            <path d="M 26 10 L 58 80 L 26 153"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-opacity="0.12"
+                  stroke-width="0.8"/>
           </svg>
         </div>
-      </div>
 
-      <!-- CTA Block -->
-      <div class="g-cta">
-        <div class="cta-box">
-          <h3>Die Technik steht.<br>Für <span class="green">Schritt 5</span><br>brauchen wir Sie.</h3>
-          <p>Ein Gespräch, 30 Minuten — danach wissen beide Seiten, wie die Strecke für Ihre Tarife läuft.</p>
-          <div class="qr-placeholder">
-            <svg viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg"><path d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM10,0H11V1H10zM13,0H14V1H13zM14,0H15V1H14zM15,0H16V1H15zM16,0H17V1H16zM17,0H18V1H17zM18,0H19V1H18zM19,0H20V1H19zM22,0H23V1H22zM23,0H24V1H23zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM0,1H1V2H0zM6,1H7V2H6zM8,1H9V2H8zM9,1H10V2H9zM10,1H11V2H10zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM16,1H17V2H16zM18,1H19V2H18zM22,1H23V2H22zM28,1H29V2H28zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM8,2H9V3H8zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM20,2H21V3H20zM22,2H23V3H22zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM28,2H29V3H28zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM9,3H10V4H9zM12,3H13V4H12zM13,3H14V4H13zM15,3H16V4H15zM16,3H17V4H16zM18,3H19V4H18zM19,3H20V4H19zM20,3H21V4H20zM22,3H23V4H22zM24,3H25V4H24zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM8,4H9V5H8zM9,4H10V5H9zM10,4H11V5H10zM12,4H13V5H12zM14,4H15V5H14zM15,4H16V5H15zM16,4H17V5H16zM17,4H18V5H17zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM28,4H29V5H28zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM12,5H13V6H12zM15,5H16V6H15zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM22,5H23V6H22zM28,5H29V6H28zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM25,6H26V7H25zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM8,7H9V8H8zM10,7H11V8H10zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM16,7H17V8H16zM17,7H18V8H17zM18,7H19V8H18zM19,7H20V8H19zM0,8H1V9H0zM1,8H2V9H1zM3,8H4V9H3zM6,8H7V9H6zM7,8H8V9H7zM11,8H12V9H11zM12,8H13V9H12zM14,8H15V9H14zM20,8H21V9H20zM22,8H23V9H22zM23,8H24V9H23zM24,8H25V9H24zM26,8H27V9H26zM27,8H28V9H27zM0,9H1V10H0zM1,9H2V10H1zM3,9H4V10H3zM4,9H5V10H4zM5,9H6V10H5zM9,9H10V10H9zM11,9H12V10H11zM12,9H13V10H12zM13,9H14V10H13zM16,9H17V10H16zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM25,9H26V10H25zM28,9H29V10H28zM0,10H1V11H0zM1,10H2V11H1zM4,10H5V11H4zM5,10H6V11H5zM6,10H7V11H6zM11,10H12V11H11zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM16,10H17V11H16zM19,10H20V11H19zM23,10H24V11H23zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM1,11H2V12H1zM3,11H4V12H3zM4,11H5V12H4zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM10,11H11V12H10zM11,11H12V12H11zM12,11H13V12H12zM13,11H14V12H13zM15,11H16V12H15zM21,11H22V12H21zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM26,11H27V12H26zM27,11H28V12H27zM0,12H1V13H0zM1,12H2V13H1zM4,12H5V13H4zM6,12H7V13H6zM8,12H9V13H8zM10,12H11V13H10zM11,12H12V13H11zM14,12H15V13H14zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM2,13H3V14H2zM3,13H4V14H3zM4,13H5V14H4zM11,13H12V14H11zM13,13H14V14H13zM14,13H15V14H14zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM1,14H2V15H1zM3,14H4V15H3zM6,14H7V15H6zM11,14H12V15H11zM13,14H14V15H13zM14,14H15V15H14zM16,14H17V15H16zM21,14H22V15H21zM22,14H23V15H22zM23,14H24V15H23zM25,14H26V15H25zM26,14H27V15H26zM27,14H28V15H27zM28,14H29V15H28zM0,15H1V16H0zM1,15H2V16H1zM2,15H3V16H2zM4,15H5V16H4zM5,15H6V16H5zM9,15H10V16H9zM11,15H12V16H11zM16,15H17V16H16zM17,15H18V16H17zM20,15H21V16H20zM25,15H26V16H25zM27,15H28V16H27zM3,16H4V17H3zM6,16H7V17H6zM7,16H8V17H7zM12,16H13V17H12zM13,16H14V17H13zM15,16H16V17H15zM17,16H18V17H17zM20,16H21V17H20zM21,16H22V17H21zM23,16H24V17H23zM27,16H28V17H27zM1,17H2V18H1zM3,17H4V18H3zM4,17H5V18H4zM8,17H9V18H8zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM13,17H14V18H13zM14,17H15V18H14zM18,17H19V18H18zM22,17H23V18H22zM23,17H24V18H23zM25,17H26V18H25zM28,17H29V18H28zM0,18H1V19H0zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM6,18H7V19H6zM8,18H9V19H8zM9,18H10V19H9zM11,18H12V19H11zM12,18H13V19H12zM14,18H15V19H14zM16,18H17V19H16zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM27,18H28V19H27zM28,18H29V19H28zM2,19H3V20H2zM3,19H4V20H3zM4,19H5V20H4zM7,19H8V20H7zM9,19H10V20H9zM12,19H13V20H12zM14,19H15V20H14zM15,19H16V20H15zM17,19H18V20H17zM20,19H21V20H20zM21,19H22V20H21zM23,19H24V20H23zM24,19H25V20H24zM27,19H28V20H27zM28,19H29V20H28zM0,20H1V21H0zM3,20H4V21H3zM6,20H7V21H6zM7,20H8V21H7zM9,20H10V21H9zM10,20H11V21H10zM15,20H16V21H15zM16,20H17V21H16zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM26,20H27V21H26zM8,21H9V22H8zM10,21H11V22H10zM11,21H12V22H11zM14,21H15V22H14zM16,21H17V22H16zM17,21H18V22H17zM20,21H21V22H20zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM28,21H29V22H28zM0,22H1V23H0zM1,22H2V23H1zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM16,22H17V23H16zM20,22H23V23H20zM24,22H25V23H24zM27,22H28V23H27zM0,23H1V24H0zM6,23H7V24H6zM9,23H10V24H9zM14,23H15V24H14zM15,23H16V24H15zM16,23H17V24H16zM18,23H19V24H18zM20,23H21V24H20zM24,23H25V24H24zM25,23H26V24H25zM26,23H27V24H26zM0,24H1V25H0zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM6,24H7V25H6zM10,24H11V25H10zM12,24H13V25H12zM16,24H17V25H16zM17,24H18V25H17zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM27,24H28V25H27zM28,24H29V25H28zM0,25H1V26H0zM2,25H3V26H2zM3,25H4V26H3zM4,25H5V26H4zM6,25H7V26H6zM8,25H9V26H8zM9,25H10V26H9zM10,25H11V26H10zM11,25H12V26H11zM12,25H13V26H12zM17,25H18V26H17zM18,25H19V26H18zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM0,26H1V27H0zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM6,26H7V27H6zM9,26H10V27H9zM12,26H13V27H12zM18,26H19V27H18zM19,26H20V27H19zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM28,26H29V27H28zM0,27H1V28H0zM6,27H7V28H6zM8,27H9V28H8zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM14,27H15V28H14zM17,27H18V28H17zM20,27H21V28H20zM21,27H22V28H21zM23,27H24V28H23zM27,27H28V28H27zM0,28H1V29H0zM1,28H2V29H1zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM9,28H10V29H9zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM14,28H15V29H14zM17,28H18V29H17zM20,28H21V29H20zM21,28H22V29H21zM24,28H25V29H24zM27,28H28V29H27z" fill="rgba(255,255,255,0.9)" fill-rule="nonzero" stroke="none"/></svg>
-            <span>pkv-beratungstool.vercel.app</span>
+        <!-- Kernsatz -->
+        <div style="border-top: 1px solid rgba(198,77,58,0.35); padding-top: 10px; margin-top: 2px; width: 100%;">
+          <div style="font-size: 10px; font-weight: 700; color: #ffd5c4; line-height: 1.35; letter-spacing: 0.01em;">
+            Die Akte-Wartezeit<br>bleibt beim Kunden.<br>Den Rest bauen wir neu.
+          </div>
+          <div style="font-size: 8.5px; color: #b8cfe3; margin-top: 8px; line-height: 1.4; font-style: italic; opacity: 0.85;">
+            Identisch in beiden Prozessen. In der alten Welt eine von vielen Pausen. In der neuen Welt die einzige.
           </div>
         </div>
+
+        <!-- Kontext-Footer -->
+        <div style="margin-top: auto; padding-top: 12px; font-size: 8px; color: #b8cfe3; opacity: 0.7; letter-spacing: 0.1em; text-transform: uppercase;">
+          Beide Prozesse<br>warten hier.
+        </div>
       </div>
 
-      <!-- ROW 3: Step 5 HERO -->
-
-      <!-- STEP 5 — HERO (NICHT VERAENDERT) -->
-      <div class="step step-hero g-s5">
-        <div class="hero-glow"></div>
-        <div class="hero-illust">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="32" fill="rgba(173,193,48,0.04)" stroke="rgba(173,193,48,0.3)" stroke-width="1"/>
-            <circle cx="50" cy="50" r="22" fill="none" stroke="rgba(173,193,48,0.1)" stroke-width="0.5" stroke-dasharray="3 3">
-              <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="30s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="50" cy="36" r="4" fill="rgba(173,193,48,0.3)" stroke="rgba(173,193,48,0.35)" stroke-width="0.8">
-              <animate attributeName="r" values="4;4.8;4" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="36" cy="56" r="3.5" fill="rgba(173,193,48,0.15)" stroke="rgba(173,193,48,0.3)" stroke-width="0.8">
-              <animate attributeName="r" values="3.5;4.2;3.5" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="64" cy="56" r="3.5" fill="rgba(173,193,48,0.15)" stroke="rgba(173,193,48,0.3)" stroke-width="0.8">
-              <animate attributeName="r" values="3.5;4.2;3.5" dur="3s" begin="1s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="44" cy="66" r="3" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8"/>
-            <circle cx="56" cy="66" r="3" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8"/>
-            <line x1="50" y1="40" x2="38" y2="53" stroke="rgba(173,193,48,0.15)" stroke-width="0.8"/>
-            <line x1="50" y1="40" x2="62" y2="53" stroke="rgba(173,193,48,0.15)" stroke-width="0.8"/>
-            <line x1="38" y1="59" x2="45" y2="63" stroke="rgba(173,193,48,0.12)" stroke-width="0.8"/>
-            <line x1="62" y1="59" x2="55" y2="63" stroke="rgba(173,193,48,0.12)" stroke-width="0.8"/>
-            <line x1="38" y1="56" x2="62" y2="56" stroke="rgba(173,193,48,0.08)" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <rect x="30" y="40" width="40" height="1" rx="0.5" fill="rgba(173,193,48,0.25)">
-              <animate attributeName="y" values="30;70;30" dur="4s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0.4;0" dur="4s" repeatCount="indefinite"/>
-            </rect>
-            <circle cx="16" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.3)" stroke-width="0.5"/>
-            <circle cx="84" cy="50" r="2" fill="rgba(173,193,48,0.1)" stroke="rgba(173,193,48,0.3)" stroke-width="0.5"/>
-            <circle r="2.5" fill="rgba(173,193,48,0.4)">
-              <animateMotion dur="8s" repeatCount="indefinite" path="M50,18 A32,32 0 1,1 49.9,18"/>
-            </circle>
-          </svg>
+      <!-- ZONE RECHTS: MORGEN -->
+      <div class="zone-tomorrow" style="border-radius: 6px; padding: 14px 12px; position: relative; display: flex; flex-direction: column;">
+        <div style="position: relative; z-index: 2;">
+          <div class="zone-kicker" style="color: #adc130;">Morgen · Zielbild</div>
+          <div class="zone-title" style="color: #f4fbdf; margin-top: 4px;">
+            2 Termine<br>statt Monate
+          </div>
+          <div style="width: 80px; height: 2px; background: linear-gradient(90deg, #adc130, transparent); margin-top: 6px;"></div>
         </div>
-        <div class="hero-content">
-          <div class="step-num">5</div>
-          <h3>Intelligente Analyse</h3>
-          <p>Liest die Krankenakte, erkennt Abrechnungsdiagnosen, filtert Relevantes — und steuert automatisch Selbst- oder Arztauskünfte an. Wir brauchen nur die offene Schnittstelle.</p>
-          <div class="collab-badge">
-            <svg viewBox="0 0 16 16" fill="none">
-              <path d="M2 8l3-3 2 1 3-3 3 3-2 2 1 2-3 1-2-1-2 1z" stroke="#adc130" stroke-width="1" fill="rgba(173,193,48,0.15)" stroke-linejoin="round"/>
-              <circle cx="8" cy="8" r="7" stroke="#adc130" stroke-width="0.8" fill="none" opacity="0.4"/>
+
+        <div style="position: relative; z-index: 2; margin-top: 10px; display: flex; flex-direction: column; gap: 1px; flex: 1;">
+
+          <!-- Termin 1 Header -->
+          <div style="display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: linear-gradient(90deg, rgba(173,193,48,0.2) 0%, rgba(173,193,48,0.05) 100%); border-left: 3px solid #adc130; border-radius: 3px; margin-bottom: 2px;">
+            <div style="font-size: 8.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #adc130;">Termin 1</div>
+            <div style="font-size: 9.5px; font-weight: 600; color: #f4fbdf;">· Erstgespräch</div>
+          </div>
+
+          <div class="step-tomorrow">
+            <div class="num">1</div>
+            <div class="label">Geführte Beratung</div>
+            <div class="desc">Web-App oder PowerPoint — gleicher Flow für alle Berater.</div>
+          </div>
+          <div class="divider-tomorrow"></div>
+          <div class="step-tomorrow">
+            <div class="num">2</div>
+            <div class="label">Digitaler Vorschlag</div>
+            <div class="desc">Tarif live, ansprechende Leistungsdarstellung, kein Excel.</div>
+          </div>
+          <div class="divider-tomorrow"></div>
+          <div class="step-tomorrow">
+            <div class="num">3</div>
+            <div class="label">Kundenzugang + Akte hochladen</div>
+            <div class="desc">Kunde bekommt Applink, lädt Akte daheim per Foto hoch.</div>
+          </div>
+
+          <!-- Wartezeit-Separator -->
+          <div style="margin: 8px 0 6px 0; padding: 8px 10px; border-top: 1px dashed rgba(184,207,227,0.35); border-bottom: 1px dashed rgba(184,207,227,0.35); display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="20" viewBox="0 0 16 20" fill="none" style="flex-shrink: 0;">
+              <path d="M3 2 L13 2 M3 18 L13 18 M4 2 L4 7 L8 10 L12 7 L12 2 M4 18 L4 13 L8 10 L12 13 L12 18" stroke="#b8cfe3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
             </svg>
-            Kooperationspunkt mit UKV
+            <div style="font-size: 9px; color: #b8cfe3; line-height: 1.35; font-style: italic;">
+              <strong style="color: #dfeaf7; font-style: normal;">Wartezeit auf die Akte</strong> — Kunde liefert, identisch zum alten Prozess, aber in der App transparent.
+            </div>
+          </div>
+
+          <!-- Termin 2 Header -->
+          <div style="display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: linear-gradient(90deg, rgba(173,193,48,0.2) 0%, rgba(173,193,48,0.05) 100%); border-left: 3px solid #adc130; border-radius: 3px; margin-bottom: 2px;">
+            <div style="font-size: 8.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #adc130;">Termin 2</div>
+            <div style="font-size: 9.5px; font-weight: 600; color: #f4fbdf;">· Finalisierung</div>
+          </div>
+
+          <div class="step-tomorrow">
+            <div class="num">4</div>
+            <div class="label">OCR + KI-Analyse der Akte</div>
+            <div class="desc">App liest die Krankenakte im Hintergrund automatisch aus.</div>
+          </div>
+
+          <div class="step-tomorrow pivot">
+            <div class="num">5</div>
+            <div class="label">
+              Intelligente Relevanzbewertung
+              <span class="pivot-badge">Kooperation UKV</span>
+            </div>
+            <div class="desc">
+              KI sortiert sofort: Ablehnung, Zuschlag, Abrechnungsdiagnose.<br>
+              Sichtbarkeit steuerbar — Berater sieht Details, Kunde die vereinfachte Sicht.
+            </div>
+          </div>
+
+          <div class="step-tomorrow">
+            <div class="num">6</div>
+            <div class="label">Dokumentenfluss im Dialog</div>
+            <div class="desc">Selbstauskunft per Umfrage, Arztanfragen direkt, Zuschläge sofort besprochen — keine Verhandlungsstrecke mehr.</div>
+          </div>
+          <div class="divider-tomorrow"></div>
+          <div class="step-tomorrow">
+            <div class="num">7</div>
+            <div class="label">Digitale Unterschrift in der App</div>
+            <div class="desc">Beratung fängt in der App an, hört in der App auf.</div>
           </div>
         </div>
+
+        <div style="position: relative; z-index: 2; margin-top: 10px; padding: 8px 10px; background: linear-gradient(135deg, rgba(0,73,141,0.45) 0%, rgba(173,193,48,0.15) 100%); border: 1px solid rgba(173,193,48,0.3); border-radius: 4px; font-size: 9px; color: #eaf2fb; line-height: 1.45; font-weight: 500;">
+          2 Termine statt Monate. Ein System statt fünf. Keine Verhandlungsstrecke mit München. Wartezeit nur noch beim Kunden — nicht im Prozess.
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Seite 1 -->
+    <footer style="position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 8.5px; color: #7d94b3; letter-spacing: 0.05em;">
+      <div>Werner Obermeier · Ausschließlichkeitsvermittler der Versicherungskammer Bayern</div>
+      <div style="color: #adc130;">PKV-Vertriebsstrecke · v4 · 18.04.2026</div>
+    </footer>
+    <div class="accent-bottom"></div>
+  </section>
+
+  <!-- ============================================================
+       SEITE 2 — Zoom auf Schritt 5 (Kooperationspunkt)
+       ============================================================ -->
+  <section class="page" aria-label="Seite 2: Zoom auf den Kooperationspunkt">
+    <div class="bg-lines"></div>
+    <div class="bg-glow" style="top: 40%;"></div>
+    <div class="bg-noise"></div>
+    <div class="accent-top"></div>
+
+    <!-- Header -->
+    <header style="position: relative; padding: 28px 40px 14px 40px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px;">
+        <div style="flex:1;">
+          <div class="meta-pill" style="margin-bottom:10px; background: rgba(173,193,48,0.12); border-color: rgba(173,193,48,0.3); color: #adc130;">Schritt 5 im Detail</div>
+          <h1 style="font-size: 26px; font-weight: 700; line-height: 1.15; color: #ffffff; margin: 0;">
+            Der <span style="color:#adc130;">Kooperationspunkt</span> —<br>
+            wo UKV-Wissen auf unsere Technik trifft.
+          </h1>
+          <p style="font-size: 12px; color: #b8cfe3; margin-top: 8px; max-width: 620px; line-height: 1.4;">
+            Intelligente Relevanzbewertung funktioniert nur als gemeinsames Projekt. Die UKV kennt die
+            Risikologik. Wir kennen die Datenstrecke. Zusammen entsteht eine Beratung, die sofort
+            einschätzbar ist — ohne Verhandlungsschleife über München.
+          </p>
+        </div>
+        <div style="text-align: right; font-size: 9.5px; color: #8ba3c2; min-width: 110px;">
+          <div style="letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: #b8cfe3;">Seite 2 / 2</div>
+          <div style="margin-top: 4px;">Werner Obermeier</div>
+          <div>Bad Endorf · 04/2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Zentraler Flow: UKV → Output ← Valdorin -->
+    <main style="position: relative; padding: 10px 40px 24px 40px;">
+
+      <!-- Konstellation Header -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; text-align: center;">
+        <div style="font-size: 9px; letter-spacing: 0.25em; color: #b8cfe3; text-transform: uppercase; font-weight: 700;">UKV bringt ein</div>
+        <div style="font-size: 9px; letter-spacing: 0.25em; color: #adc130; text-transform: uppercase; font-weight: 700;">Gemeinsames Ergebnis</div>
+        <div style="font-size: 9px; letter-spacing: 0.25em; color: #b8cfe3; text-transform: uppercase; font-weight: 700;">Valdorin baut</div>
       </div>
 
-      <!-- ROW 4: Steps 6, 7 + Final CTA -->
+      <!-- Drei Säulen mit verbindenden Pfeilen -->
+      <div class="coop-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; position: relative;">
 
-      <!-- STEP 6 -->
-      <div class="step step-result g-s6">
-        <div class="step-inner">
-          <div class="step-illust">
-            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="20" y="4" width="160" height="52" rx="6" fill="rgba(91,163,224,0.03)" stroke="rgba(91,163,224,0.2)" stroke-width="0.5"/>
-              <rect x="35" y="34" width="16" height="18" rx="2" fill="rgba(91,163,224,0.12)" stroke="rgba(91,163,224,0.22)" stroke-width="0.8"/>
-              <rect x="57" y="22" width="16" height="30" rx="2" fill="rgba(91,163,224,0.16)" stroke="rgba(91,163,224,0.4)" stroke-width="0.8"/>
-              <rect x="79" y="14" width="16" height="38" rx="2" fill="rgba(173,193,48,0.12)" stroke="rgba(173,193,48,0.25)" stroke-width="0.8">
-                <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
-              </rect>
-              <text x="82" y="11" font-family="Ubuntu" font-size="6" font-weight="700" fill="rgba(173,193,48,0.45)">+12%</text>
-              <line x1="110" y1="10" x2="110" y2="50" stroke="rgba(91,163,224,0.16)" stroke-width="0.5"/>
-              <circle cx="145" cy="30" r="18" stroke="rgba(91,163,224,0.12)" stroke-width="0.8" fill="none"/>
-              <circle cx="145" cy="30" r="12" stroke="rgba(91,163,224,0.2)" stroke-width="0.5" fill="none"/>
-              <circle cx="145" cy="30" r="6" stroke="rgba(173,193,48,0.3)" stroke-width="0.8" fill="none"/>
-              <circle cx="145" cy="30" r="2.5" fill="rgba(173,193,48,0.35)">
-                <animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite"/>
-              </circle>
-              <text x="130" y="52" font-family="Ubuntu" font-size="6" font-weight="500" fill="rgba(91,163,224,0.4)">EUR exakt</text>
+        <!-- Linke Karte: UKV -->
+        <div class="coop-card ukv">
+          <div style="display:flex; align-items:center; gap: 8px; margin-bottom: 10px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#b8cfe3" stroke-width="1.5"/>
+              <path d="M8 11h8M8 14h6M8 8h8" stroke="#b8cfe3" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
+            <div style="font-size: 13px; font-weight: 700; color: #dfeaf7;">Relevanzkriterien</div>
           </div>
-          <div class="step-num">6</div>
-          <h3>Exaktes Angebot</h3>
-          <p>Konkrete Risikozuschläge und fertige Beschreibung für die ärztliche Rückfrage — direkt für den Kunden.</p>
-        </div>
-      </div>
+          <div style="font-size: 10px; color: #b8cfe3; margin-bottom: 10px; line-height: 1.4;">
+            Das Risiko-Know-how, das bisher in München lag.
+          </div>
 
-      <!-- STEP 7 -->
-      <div class="step step-result final g-s7">
-        <div class="step-inner">
-          <div class="step-illust">
-            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="30" y="2" width="70" height="56" rx="5" stroke="rgba(91,163,224,0.35)" stroke-width="1" fill="rgba(0,73,141,0.05)"/>
-              <line x1="38" y1="12" x2="92" y2="12" stroke="rgba(91,163,224,0.28)" stroke-width="0.8"/>
-              <line x1="38" y1="18" x2="88" y2="18" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
-              <line x1="38" y1="24" x2="85" y2="24" stroke="rgba(91,163,224,0.2)" stroke-width="0.8"/>
-              <line x1="38" y1="30" x2="90" y2="30" stroke="rgba(91,163,224,0.16)" stroke-width="0.8"/>
-              <line x1="38" y1="44" x2="80" y2="44" stroke="rgba(91,163,224,0.4)" stroke-width="1"/>
-              <path d="M40 43 Q50 36 58 43 Q64 48 72 40" stroke="rgba(173,193,48,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round">
-                <animate attributeName="stroke-dasharray" values="0 100;60 100" dur="3s" repeatCount="indefinite"/>
-              </path>
-              <path d="M108 30 L125 30" stroke="rgba(91,163,224,0.28)" stroke-width="1" stroke-dasharray="3 2">
-                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite"/>
-              </path>
-              <circle cx="148" cy="30" r="18" fill="rgba(173,193,48,0.06)" stroke="rgba(173,193,48,0.3)" stroke-width="1"/>
-              <path d="M138 30l6 6 14-14" stroke="rgba(173,193,48,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
-              </path>
-              <circle cx="148" cy="30" r="22" stroke="rgba(173,193,48,0.08)" stroke-width="0.5" fill="none">
-                <animate attributeName="r" values="22;26;22" dur="3s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.2;0;0.2" dur="3s" repeatCount="indefinite"/>
-              </circle>
+          <div class="bullet" style="color: #dfeaf7;">
+            Diagnose-Cluster: Was ist Zuschlag, was Ablehnung, was folgenlos?
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Abrechnungsdiagnosen-Liste: Was gilt als Artefakt, nicht als Befund?
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Zuschlags-Logik: Welche Prozente bei welcher Schwere?
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Ausschluss-Kriterien: Was geht gar nicht, was mit Klausel?
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Freigabe für die KI-Trainingsdaten — anonymisiert.
+          </div>
+        </div>
+
+        <!-- Mitte Karte: Output -->
+        <div class="coop-card output" style="display: flex; flex-direction: column;">
+          <div style="display:flex; align-items:center; gap: 8px; margin-bottom: 10px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2 L15 9 L22 10 L17 15 L18 22 L12 18.5 L6 22 L7 15 L2 10 L9 9 Z" fill="#adc130" fill-opacity="0.2" stroke="#adc130" stroke-width="1.5" stroke-linejoin="round"/>
             </svg>
+            <div style="font-size: 13px; font-weight: 700; color: #f4fbdf;">Sofort-Einschätzung</div>
           </div>
-          <div class="step-num">7</div>
-          <h3>Online-Antrag</h3>
-          <p>Digitale Unterschrift, kein Medienbruch. Fertige Übergabe im richtigen Format für Ihren Innendienst.</p>
+          <div style="font-size: 10px; color: #d5e3a8; margin-bottom: 10px; line-height: 1.4; font-style: italic;">
+            Beim Kunden am Tisch. Nicht nach zwei Wochen per Post.
+          </div>
+
+          <div class="bullet" style="color: #f4fbdf;">
+            <strong>Annahme / Zuschlag / Ablehnung</strong> — sichtbar im Beratungsdialog.
+          </div>
+          <div class="bullet" style="color: #f4fbdf;">
+            <strong>Sichtbarkeits-Steuerung:</strong> Berater sieht Details, Kunde die Zusammenfassung. Volltransparenz bei beidseitigem Einverständnis.
+          </div>
+          <div class="bullet" style="color: #f4fbdf;">
+            <strong>Begründungstext</strong> je Einschätzung — Kunde versteht, warum.
+          </div>
+          <div class="bullet" style="color: #f4fbdf;">
+            <strong>Dokumenten-Vorschlag</strong> direkt anschließend: Attest, Selbstauskunft, Arztanfrage.
+          </div>
+
+          <div style="margin-top: auto; padding-top: 12px;">
+            <div style="padding: 10px 12px; background: rgba(173,193,48,0.15); border-left: 2px solid #adc130; border-radius: 3px; font-size: 10px; color: #f4fbdf; line-height: 1.45;">
+              <strong>Ergebnis:</strong> Die Verhandlungsstrecke mit München fällt weg —
+              weil die Verhandlung schon am Küchentisch stattfindet.
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Karte: Valdorin -->
+        <div class="coop-card valdorin">
+          <div style="display:flex; align-items:center; gap: 8px; margin-bottom: 10px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke="#6fa8e3" stroke-width="1.5"/>
+              <path d="M7 10l3 3 5-5" stroke="#adc130" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div style="font-size: 13px; font-weight: 700; color: #dfeaf7;">App · OCR · KI · UI</div>
+          </div>
+          <div style="font-size: 10px; color: #b8cfe3; margin-bottom: 10px; line-height: 1.4;">
+            Die Datenstrecke, in der die UKV-Logik läuft.
+          </div>
+
+          <div class="bullet" style="color: #dfeaf7;">
+            Berater-App mit geführtem Beratungsflow (Web + Tablet).
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Kunden-App: Akte per Foto hochladen, eigene Szenarien durchspielen.
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            OCR-Pipeline: Krankenakte strukturiert auslesen, auch aus Scans.
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            KI-Schicht: UKV-Kriterien anwenden, Begründungen generieren.
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Rollen-UI: Berater-Sicht vs. Kunden-Sicht, DSGVO-konform.
+          </div>
+          <div class="bullet" style="color: #dfeaf7;">
+            Digitale Unterschrift, Datenübergabe an die UKV-Systeme.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Wie gehen wir vor -->
+      <div style="margin-top: 22px; padding: 16px 20px; background: linear-gradient(135deg, rgba(0,73,141,0.35) 0%, rgba(10,26,51,0.7) 100%); border: 1px solid rgba(184,207,227,0.2); border-radius: 6px;">
+        <div style="font-size: 10px; letter-spacing: 0.2em; color: #adc130; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Wie wir starten</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #adc130;">01</div>
+            <div style="font-size: 10px; color: #eaf2fb; font-weight: 600; margin-top: 2px;">Datenfreigabe klären</div>
+            <div style="font-size: 9px; color: #a9bcd4; margin-top: 2px; line-height: 1.35;">Anonymisierung, DSGVO, Pilotregion</div>
+          </div>
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #adc130;">02</div>
+            <div style="font-size: 10px; color: #eaf2fb; font-weight: 600; margin-top: 2px;">Kriterien-Workshop</div>
+            <div style="font-size: 9px; color: #a9bcd4; margin-top: 2px; line-height: 1.35;">Zwei Tage mit UKV-Risiko-Team</div>
+          </div>
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #adc130;">03</div>
+            <div style="font-size: 10px; color: #eaf2fb; font-weight: 600; margin-top: 2px;">Prototyp in 8 Wochen</div>
+            <div style="font-size: 9px; color: #a9bcd4; margin-top: 2px; line-height: 1.35;">Mit echten Fällen aus der Pilot-Agentur</div>
+          </div>
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #adc130;">04</div>
+            <div style="font-size: 10px; color: #eaf2fb; font-weight: 600; margin-top: 2px;">Rollout im Agenturenvertrieb</div>
+            <div style="font-size: 9px; color: #a9bcd4; margin-top: 2px; line-height: 1.35;">Schrittweise, mit Feedback-Loops</div>
+          </div>
         </div>
       </div>
 
-      <!-- CTA entfernt -->
+      <!-- Kontaktbox -->
+      <div style="margin-top: 20px; padding: 14px 18px; background: linear-gradient(135deg, rgba(173,193,48,0.15) 0%, rgba(0,73,141,0.35) 100%); border: 1px solid rgba(173,193,48,0.35); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+        <div>
+          <div style="font-size: 10px; letter-spacing: 0.2em; color: #adc130; text-transform: uppercase; font-weight: 700;">Kontakt</div>
+          <div style="font-size: 14px; font-weight: 700; color: #ffffff; margin-top: 4px;">Werner Obermeier</div>
+          <div style="font-size: 10px; color: #b8cfe3; margin-top: 2px;">Obermeier Versicherungen · Bad Endorf · Oberbayern</div>
+        </div>
+        <div style="text-align: right; font-size: 10px; color: #eaf2fb; line-height: 1.5;">
+          <div>w.obermeier@obermeier-versicherungen.de</div>
+          <div style="color: #b8cfe3;">Ausschließlichkeitsvermittler der</div>
+          <div style="color: #b8cfe3;">Versicherungskammer Bayern</div>
+        </div>
+      </div>
 
-    </div>
+    </main>
 
-    <!-- FOOTER -->
-    <div class="footer">
-      <div class="brand">Obermeier Versicherungen, Bad Endorf</div>
-      <div class="meta">Ausschließlichkeitsvermittler der Versicherungskammer Bayern</div>
-    </div>
+    <!-- Footer Seite 2 -->
+    <footer style="position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 8.5px; color: #7d94b3; letter-spacing: 0.05em;">
+      <div>Gemeinsames Projekt · UKV × Valdorin</div>
+      <div style="color: #adc130;">Kooperationspunkt · Schritt 5</div>
+    </footer>
+    <div class="accent-bottom"></div>
+  </section>
 
-  </div>
 </div>
-
 </body>
 </html>
