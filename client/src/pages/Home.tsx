@@ -244,19 +244,10 @@ function Hourglass() {
   );
 }
 
-/* ── Sources ── */
+/* ── Sources (nur Research-Agent-verifiziert, siehe ~/Valdorin/QUELLEN.md) ── */
 const sources = [
-  { id: 1, label: "Signicat: The Battle to Onboard (2022)", url: "https://www.signicat.com/de/pressemitteilungen/geduldsfaden-reisst-immer-schneller-milliardengrab-fuer-banken-versicherungen" },
-  { id: 2, label: "IT Finanzmagazin: Conversion Rate Versicherung", url: "https://www.it-finanzmagazin.de/6-tipps-zur-steigerung-der-conversion-rate-fuer-online-versicherungs-und-kredit-anbieter-14339/" },
-  { id: 3, label: "Bitkom 2025: Versichert per Klick", url: "https://www.bitkom.org/Presse/Presseinformation/83-Prozent-schliessen-Versicherungen-online" },
-  { id: 4, label: "Paperfly 2025: Digitale Abschlusszeiten", url: "https://paperfly.io/de/blog/digitale-abschlusszeiten-versicherung/" },
-  { id: 5, label: "MSR Consulting / KUBUS-Studie 2021", url: "https://www.msr.de/presse/pressemitteilungen/deutsche-assekuranz-zunehmend-kundenorientiert-alle-top-22-versicherer-mit-positivem-nps/" },
-  { id: 6, label: "anwalt.de: BU-Anträge und Überforderung", url: "https://www.anwalt.de/rechtstipps/komplizierte-bu-warum-immer-mehr-versicherte-ihre-antraege-abbrechen-238437.html" },
-  { id: 7, label: "M+M Versichertenbarometer 2024", url: "https://www.m-plus-m.de/mm-versichertenbarometer-2024/" },
-  { id: 8, label: "McKinsey: Future of AI in Insurance", url: "https://www.mckinsey.com/industries/financial-services/our-insights/the-future-of-ai-in-the-insurance-industry" },
-  { id: 9, label: "PKV-Verband: Zufriedenheit der Versicherten", url: "https://www.pkv.de/verband/presse/meldungen/umfrage-belegt-hohe-zufriedenheit-der-pkv-versicherten/" },
-  { id: 10, label: "GDV 2024: Digitale Abschlüsse", url: "https://www.gdv.de/gdv/medien/medieninformationen/gdv-statistik-jeder-fuenfte-versicherungsvertrag-wird-digital-abgeschlossen-189444" },
-  { id: 11, label: "Insurance Asia: McKinsey 10–20 % AI-Lift (verifizierter Beleg)", url: "https://insuranceasia.com/insurance/news/mckinsey-finds-insurers-lagging-peers-miss-out-ai-led-gains" },
+  { id: 1, label: "McKinsey: Future of AI in Insurance", url: "https://www.mckinsey.com/industries/financial-services/our-insights/the-future-of-ai-in-the-insurance-industry" },
+  { id: 2, label: "Insurance Asia: McKinsey 10–20 % AI-Lift (verifizierter Beleg)", url: "https://insuranceasia.com/insurance/news/mckinsey-finds-insurers-lagging-peers-miss-out-ai-led-gains" },
 ];
 
 /* ══════════════════════════════════════════════════════════════════
@@ -309,7 +300,7 @@ export default function Home() {
           </SectionReveal>
           <SectionReveal delay={200}>
             <p className="mt-8 text-lg sm:text-xl text-[oklch(0.35_0.01_65)] max-w-2xl leading-relaxed">
-              Aktuell schließen wir rund 40 % unserer PKV-Beratungen ab. Unser Ziel: 60 %. Bei Kollegen, die PKV seltener beraten, ist das Potenzial noch deutlich höher — viele fangen gar nicht erst an, weil der Prozess zu komplex erscheint. <Src n={8} />
+              Aktuell schließen wir rund 40 % unserer PKV-Beratungen ab. Unser Ziel: 60 %. Bei Kollegen, die PKV seltener beraten, ist das Potenzial noch deutlich höher — viele fangen gar nicht erst an, weil der Prozess zu komplex erscheint. <Src n={1} />
             </p>
           </SectionReveal>
           <SectionReveal delay={300}>
@@ -626,7 +617,7 @@ export default function Home() {
                   Abschlussquote
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                  Von aktuell 40 % auf 60 % — das sind 2 zusätzliche Abschlüsse pro 10 Beratungen. Bei Kollegen, die PKV seltener beraten, ist das Potenzial durch den standardisierten Prozess noch deutlich höher. <Src n={8} />
+                  Von aktuell 40 % auf 60 % — das sind 2 zusätzliche Abschlüsse pro 10 Beratungen. Bei Kollegen, die PKV seltener beraten, ist das Potenzial durch den standardisierten Prozess noch deutlich höher. <Src n={1} />
                 </p>
               </div>
             </SectionReveal>
@@ -634,13 +625,13 @@ export default function Home() {
             <SectionReveal delay={100}>
               <div className="bg-[oklch(0.97_0.003_80)] rounded-lg p-8 border border-border/50 h-full">
                 <div className="text-4xl sm:text-5xl font-serif text-[oklch(0.52_0.14_175)] leading-none">
-                  <BigNumber value={74} suffix=" %" color="solution" />
+                  <BigNumber value={2} suffix=" Std." color="solution" />
                 </div>
                 <h3 className="mt-4 font-semibold text-foreground text-lg">
                   Weniger Arbeitszeit pro Antrag
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                  Statt 1–3 Stunden manueller Aktenaufarbeitung plus Stunden für Papieranträge und Nachfassen: Die KI-gestützte Analyse reduziert den Aufwand auf Minuten. <Src n={4} />
+                  Aus unserer Agentur-Erfahrung: Die KI-gestützte Analyse würde die Bearbeitungszeit pro Antrag um ca. 2 Stunden verkürzen — Stunden Handarbeit werden zu Minuten.
                 </p>
               </div>
             </SectionReveal>
@@ -670,9 +661,9 @@ export default function Home() {
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[oklch(0.52_0.14_175)] mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="font-semibold text-foreground text-sm">Weniger Fehler bei der Gesundheitsprüfung</p>
+                    <p className="font-semibold text-foreground text-sm">Besserer Überblick bei der Gesundheitsprüfung</p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      KI-Analyse statt Handarbeit: Fehlerquote sinkt von 12–18 % auf 2–4 %. <Src n={4} />
+                      KI-Analyse statt Handarbeit sorgt für einen deutlich besseren Überblick — übersehene Diagnosen und falsche Zuordnungen werden seltener.
                     </p>
                   </div>
                 </div>
@@ -717,7 +708,7 @@ export default function Home() {
               Fazit
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white max-w-4xl leading-[1.15]">
-              End-to-End-Digitalisierung steigert die Abschlussquote um bis zu 20 %. <Src n={8} /> <Src n={11} />
+              End-to-End-Digitalisierung steigert die Abschlussquote um bis zu 20 %. <Src n={1} /> <Src n={2} />
             </h2>
           </SectionReveal>
           <SectionReveal delay={100}>
