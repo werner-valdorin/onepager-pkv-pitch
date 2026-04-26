@@ -65,11 +65,28 @@ function BigNumber({
   );
 }
 
-/* ── Source inline tag ── */
+/* ── Source inline tag — klickbarer Link zum externen Artikel ── */
 function Src({ n, label }: { n: number; label?: string }) {
+  const src = sources.find((s) => s.id === n);
+  const tooltip = label || src?.label || `Quelle ${n}`;
+  if (!src) {
+    return (
+      <sup className="text-[10px] text-muted-foreground/50 ml-0.5" title={tooltip}>
+        [{n}]
+      </sup>
+    );
+  }
   return (
-    <sup className="text-[10px] text-muted-foreground/50 ml-0.5 cursor-help" title={label || `Quelle ${n}`}>
-      [{n}]
+    <sup className="ml-0.5">
+      <a
+        href={src.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={tooltip}
+        className="text-[10px] text-muted-foreground/70 hover:text-foreground underline-offset-2 hover:underline transition-colors"
+      >
+        [{n}]
+      </a>
     </sup>
   );
 }
