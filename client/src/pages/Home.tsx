@@ -295,12 +295,12 @@ export default function Home() {
               End-to-End-Digitalisierung steigert die Abschlussquote um bis zu{" "}
               <span className="text-[oklch(0.42_0.14_175)]">
                 <BigNumber value={20} suffix=" %" color="foreground" />
-              </span>
+              </span> <Src n={1} />
             </h1>
           </SectionReveal>
           <SectionReveal delay={200}>
             <p className="mt-8 text-lg sm:text-xl text-[oklch(0.35_0.01_65)] max-w-2xl leading-relaxed">
-              Aktuell schließen wir rund 40 % unserer PKV-Beratungen ab. Unser Ziel: 60 %. Bei Kollegen, die PKV seltener beraten, ist das Potenzial noch deutlich höher — viele fangen gar nicht erst an, weil der Prozess zu komplex erscheint. <Src n={1} />
+              Aktuell schließen wir rund 40 % unserer PKV-Beratungen ab. Unser Ziel: 60 %. Bei Kollegen, die PKV seltener beraten, ist das Potenzial noch deutlich höher — viele fangen gar nicht erst an, weil der Prozess zu komplex erscheint.
             </p>
           </SectionReveal>
           <SectionReveal delay={300}>
@@ -617,7 +617,7 @@ export default function Home() {
                   Abschlussquote
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                  Von aktuell 40 % auf 60 % — das sind 2 zusätzliche Abschlüsse pro 10 Beratungen. Bei Kollegen, die PKV seltener beraten, ist das Potenzial durch den standardisierten Prozess noch deutlich höher. <Src n={1} />
+                  Von aktuell 40 % auf 60 % — das sind 2 zusätzliche Abschlüsse pro 10 Beratungen. Bei Kollegen, die PKV seltener beraten, ist das Potenzial durch den standardisierten Prozess noch deutlich höher.
                 </p>
               </div>
             </SectionReveal>
